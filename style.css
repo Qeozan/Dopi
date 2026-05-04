@@ -1,112 +1,406 @@
-:root {
-  --bg: #000;
-  --panel: #0a0a0a;
-  --line: rgba(255,255,255,0.15);
-  --line-strong: rgba(255,255,255,0.35);
-  --text: #ffffff;
-  --muted: rgba(255,255,255,0.5);
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Tabs</title>
 
-/* УБИРАЕМ ВСЕ СКРУГЛЕНИЯ */
-* {
-  border-radius: 0 !important;
-}
+  <style>
+    /* ===== ТВОИ ОРИГИНАЛЬНЫЕ СТИЛИ ===== */
+    :root {
+      --bg: #000;
+      --panel: #0a0a0a;
+      --line: rgba(255,255,255,0.15);
+      --line-strong: rgba(255,255,255,0.35);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.5);
+    }
 
-/* фон */
-body {
-  background:
-    linear-gradient(180deg, #000, #050505 40%, #000);
-}
+    /* УБИРАЕМ ВСЕ СКРУГЛЕНИЯ */
+    * {
+      border-radius: 0 !important;
+      box-sizing: border-box;
+    }
 
-/* панели */
-.panel {
-  background: #0a0a0a;
-  border: 1px solid var(--line);
-  padding: 0;
-}
+    /* фон */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #000, #050505 40%, #000);
+    }
 
-/* заголовок панели */
-.panel-head {
-  border-bottom: 1px solid var(--line);
-  padding: 14px 18px;
-  background: #000;
-}
+    /* панели */
+    .panel {
+      background: #0a0a0a;
+      border: 1px solid var(--line);
+      padding: 0;
+      margin-bottom: 20px;
+    }
 
-.panel-title {
-  font-size: 18px;
-  letter-spacing: 0.2em;
-}
+    /* заголовок панели */
+    .panel-head {
+      border-bottom: 1px solid var(--line);
+      padding: 14px 18px;
+      background: #000;
+    }
 
-.panel-mark {
-  font-size: 12px;
-}
+    .panel-title {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+    }
 
-/* контент панели */
-.panel-content {
-  padding: 20px;
-}
+    .panel-mark {
+      font-size: 12px;
+    }
 
-/* ===== ТАБЛИЦА ===== */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
+    /* контент панели */
+    .panel-content {
+      padding: 20px;
+    }
 
-/* строки */
-.table tr {
-  border-bottom: 1px solid var(--line);
-}
+    /* ===== ТАБЛИЦА ===== */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
 
-/* ячейки */
-.table td,
-.table th {
-  padding: 14px 16px;
-  text-align: left;
-  border-right: 1px solid var(--line);
-}
+    /* строки */
+    .table tr {
+      border-bottom: 1px solid var(--line);
+    }
 
-/* убираем последнюю линию справа */
-.table td:last-child,
-.table th:last-child {
-  border-right: none;
-}
+    /* ячейки */
+    .table td,
+    .table th {
+      padding: 14px 16px;
+      text-align: left;
+      border-right: 1px solid var(--line);
+    }
 
-/* заголовок таблицы */
-.table th {
-  background: #000;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-}
+    /* убираем последнюю линию справа */
+    .table td:last-child,
+    .table th:last-child {
+      border-right: none;
+    }
 
-/* hover эффект */
-.table tr:hover {
-  background: rgba(255,255,255,0.04);
-}
+    /* заголовок таблицы */
+    .table th {
+      background: #000;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
 
-/* вкладки */
-.tab-btn.large {
-  border: 1px solid var(--line);
-  background: #000;
-}
+    /* hover эффект */
+    .table tr:hover {
+      background: rgba(255,255,255,0.04);
+    }
 
-.tab-btn.small {
-  background: #000;
-}
+    /* вкладки */
+    .tab-btn {
+      cursor: pointer;
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
 
-.tab-btn.active {
-  background: #111;
-  border-color: var(--line-strong);
-}
+    .tab-btn.large {
+      border: 1px solid var(--line);
+      background: #000;
+      padding: 15px 30px;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+    }
 
-/* placeholder заменим на табличный блок */
-.placeholder {
-  border: none;
-  padding: 0;
-  min-height: auto;
-}
+    .tab-btn.small {
+      background: #000;
+      border: 1px solid var(--line);
+      padding: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
 
-/* grid теперь как таблица */
-.grid {
-  display: block;
-}
+    .tab-btn.active {
+      background: #111;
+      border-color: var(--line-strong);
+    }
+
+    .tab-btn:hover {
+      background: #111;
+    }
+
+    /* placeholder заменим на табличный блок */
+    .placeholder {
+      border: none;
+      padding: 0;
+      min-height: auto;
+    }
+
+    /* grid теперь как таблица */
+    .grid {
+      display: block;
+    }
+
+
+    /* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ КАРКАСА И ПОД-ВКЛАДОК ===== */
+    .site {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .tabs-start {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .tab-content-main {
+      display: none;
+    }
+
+    .tab-content-main.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .sub-tabs-container {
+      display: grid;
+      grid-template-columns: 1fr 60px;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .sub-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sub-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .sub-panel.active {
+      display: block;
+    }
+
+    .sub-image {
+      width: 100%;
+      height: 250px;
+      border: 1px solid var(--line);
+      margin: 15px 0;
+      background: #000;
+    }
+
+    .sub-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sub-description {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .sub-tabs-container {
+        grid-template-columns: 1fr;
+      }
+      .sub-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        order: -1;
+      }
+      .tab-btn.small {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site">
+
+    <!-- ГЛАВНАЯ НАВИГАЦИЯ -->
+    <div class="tabs-start">
+      <button class="tab-btn large active" onclick="openMainTab(event, 'main-1')">БЛОК I</button>
+      <button class="tab-btn large" onclick="openMainTab(event, 'main-2')">БЛОК II</button>
+      <button class="tab-btn large" onclick="openMainTab(event, 'main-3')">БЛОК III</button>
+    </div>
+
+    <div class="content">
+
+      <!-- ГЛАВНАЯ ВКЛАДКА 1 -->
+      <div id="main-1" class="tab-content-main active">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">БЛОК I: ИНФОРМАЦИЯ</h2>
+          </div>
+          <div class="panel-content">
+            <p style="color: var(--muted); margin: 0;">Контент первой главной вкладки...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ГЛАВНАЯ ВКЛАДКА 2 (с примером таблицы) -->
+      <div id="main-2" class="tab-content-main">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">БЛОК II: ДАННЫЕ</h2>
+          </div>
+          <div class="panel-content" style="padding: 0;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ПАРАМЕТР</th>
+                  <th>ЗНАЧЕНИЕ</th>
+                  <th>СТАТУС</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Система 01</td>
+                  <td>Стабильно</td>
+                  <td>OK</td>
+                </tr>
+                <tr>
+                  <td>Система 02</td>
+                  <td>Ожидание</td>
+                  <td>--</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ГЛАВНАЯ ВКЛАДКА 3 (с 8 под-вкладками) -->
+      <div id="main-3" class="tab-content-main">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">БЛОК III: ДЕТАЛИЗАЦИЯ</h2>
+          </div>
+          
+          <div class="sub-tabs-container">
+            
+            <!-- Левая часть: Контент под-вкладок -->
+            <div class="sub-content-area">
+              
+              <div class="sub-panel active" id="sub-1">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ I</h3>
+                <div class="sub-image">
+                  <img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+01" alt="Фото 1">
+                </div>
+                <p class="sub-description">Описание первого раздела. Строгий стиль, без скруглений.</p>
+              </div>
+
+              <div class="sub-panel" id="sub-2">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ II</h3>
+                <div class="sub-image">
+                  <img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+02" alt="Фото 2">
+                </div>
+                <p class="sub-description">Описание второго раздела.</p>
+              </div>
+
+              <div class="sub-panel" id="sub-3">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ III</h3>
+                <div class="sub-image"><img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+03" alt="Фото 3"></div>
+                <p class="sub-description">Текст для третьего раздела...</p>
+              </div>
+
+              <div class="sub-panel" id="sub-4">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ IV</h3>
+                <div class="sub-image"><img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+04" alt="Фото 4"></div>
+                <p class="sub-description">Текст для четвертого раздела...</p>
+              </div>
+
+              <div class="sub-panel" id="sub-5">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ V</h3>
+                <div class="sub-image"><img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+05" alt="Фото 5"></div>
+                <p class="sub-description">Текст для пятого раздела...</p>
+              </div>
+
+              <div class="sub-panel" id="sub-6">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ VI</h3>
+                <div class="sub-image"><img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+06" alt="Фото 6"></div>
+                <p class="sub-description">Текст для шестого раздела...</p>
+              </div>
+
+              <div class="sub-panel" id="sub-7">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ VII</h3>
+                <div class="sub-image"><img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+07" alt="Фото 7"></div>
+                <p class="sub-description">Текст для седьмого раздела...</p>
+              </div>
+
+              <div class="sub-panel" id="sub-8">
+                <h3 class="panel-title" style="margin: 0;">РАЗДЕЛ VIII</h3>
+                <div class="sub-image"><img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+08" alt="Фото 8"></div>
+                <p class="sub-description">Текст для восьмого раздела...</p>
+              </div>
+
+            </div>
+
+            <!-- Правая часть: Кнопки навигации под-вкладок -->
+            <div class="sub-nav">
+              <button class="tab-btn small active" onclick="openSubTab(event, 'sub-1')">I</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-2')">II</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-3')">III</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-4')">IV</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-5')">V</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-6')">VI</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-7')">VII</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-8')">VIII</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Переключение главных вкладок
+    function openMainTab(event, tabId) {
+      document.querySelectorAll('.tab-content-main').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.querySelectorAll('.tabs-start .tab-btn.large').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // Переключение под-вкладок
+    function openSubTab(event, subTabId) {
+      const container = event.currentTarget.closest('.sub-tabs-container');
+      
+      container.querySelectorAll('.sub-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      container.querySelectorAll('.sub-nav .tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      document.getElementById(subTabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
