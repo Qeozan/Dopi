@@ -277,11 +277,11 @@
       }
     }
 
-    /* === НОВЫЕ СТИЛИ ДЛЯ ТРЕТЬЕГО РАЗДЕЛА === */
+    /* === СТИЛИ ДЛЯ ТРЕТЬЕГО РАЗДЕЛА === */
     .sub-section {
       min-height: 60vh;
       margin-bottom: 30px;
-      scroll-margin-top: 100px; /* Чтобы топбар не перекрывал заголовок при скролле */
+      scroll-margin-top: 100px;
     }
     
     .sub-section:last-child {
@@ -296,31 +296,35 @@
       font-weight: 600;
     }
 
-    /* Боковое меню шорткатов */
+    /* === БОКОВОЕ МЕНЮ (Вынесено отдельно) === */
     .side-nav {
       position: fixed;
-      right: 30px;
+      right: 20px; /* Прижимаем строго к правому краю монитора */
       top: 50%;
-      transform: translateY(-50%);
+      z-index: 100;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      z-index: 100;
+      
+      /* Анимация: по умолчанию меню спрятано за правым краем и прозрачно */
+      transform: translate(150%, -50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
     }
 
-    /* Делаем кнопочки в сайдбаре чуть компактнее, чтобы не перегружать экран, но сохраняем твой стиль */
+    /* Класс, который JS добавляет при открытии III вкладки */
+    .side-nav.show {
+      transform: translate(0, -50%);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .side-nav .tab-btn.small {
       min-width: 65px;
       padding: 10px 0;
       font-size: 20px;
       text-align: center;
-    }
-
-    /* Адаптив для бокового меню */
-    @media (max-width: 1350px) {
-      .side-nav {
-        right: 15px; /* Прижимаем ближе к краю на небольших мониторах */
-      }
     }
 
     @media (max-width: 900px) {
@@ -330,8 +334,7 @@
       }
       .grid { grid-template-columns: 1fr; }
       
-      /* Скрываем боковое меню на мобильных, чтобы не мешало */
-      .side-nav { display: none; } 
+      .side-nav { display: none; } /* Прячем меню на мобилках */
     }
 
     @media (max-width: 640px) {
@@ -344,6 +347,18 @@
   </style>
 </head>
 <body>
+
+  <!-- Боковое меню теперь лежит прямо в <body>, независимо от панелей контента -->
+  <div id="sideNav" class="side-nav">
+    <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
+    <button class="tab-btn small side-btn" data-target="sub-2">II</button>
+    <button class="tab-btn small side-btn" data-target="sub-3">III</button>
+    <button class="tab-btn small side-btn" data-target="sub-4">IV</button>
+    <button class="tab-btn small side-btn" data-target="sub-5">V</button>
+    <button class="tab-btn small side-btn" data-target="sub-6">VI</button>
+    <button class="tab-btn small side-btn" data-target="sub-7">VII</button>
+  </div>
+
   <div class="site">
     <div id="topbar" class="topbar">
       <div class="topbar-inner">
@@ -402,7 +417,6 @@
             <div class="panel-mark">III</div>
           </div>
           
-          <!-- Внутри третьего таба 7 под-пунктов -->
           <div class="sub-sections-wrapper">
             <div id="sub-1" class="sub-section">
               <h3 class="sub-section-title">Раздел I</h3>
@@ -434,17 +448,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Боковое меню навигации (Шорткаты), которое будет справа на экране -->
-        <div class="side-nav">
-          <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
-          <button class="tab-btn small side-btn" data-target="sub-2">II</button>
-          <button class="tab-btn small side-btn" data-target="sub-3">III</button>
-          <button class="tab-btn small side-btn" data-target="sub-4">IV</button>
-          <button class="tab-btn small side-btn" data-target="sub-5">V</button>
-          <button class="tab-btn small side-btn" data-target="sub-6">VI</button>
-          <button class="tab-btn small side-btn" data-target="sub-7">VII</button>
-        </div>
       </div>
     </section>
   </div>
@@ -455,6 +458,7 @@
     const hero = document.getElementById("hero");
     const intro = document.getElementById("intro");
     const content = document.getElementById("content");
+    const sideNav = document.getElementById("sideNav");
 
     const allButtons = document.querySelectorAll(".topbar-inner .tab-btn, .tabs-start .tab-btn");
     const panels = document.querySelectorAll(".tab-panel");
@@ -474,6 +478,15 @@
     function openTab(tabId) {
       setActive(tabId);
 
+      // Функция вызова бокового меню (только для 3 вкладки)
+      const toggleSideNav = () => {
+        if (tabId === "tab3") {
+          sideNav.classList.add("show");
+        } else {
+          sideNav.classList.remove("show");
+        }
+      };
+
       if (firstOpen) {
         firstOpen = false;
 
@@ -484,7 +497,10 @@
         setTimeout(() => {
           topbar.classList.add("show");
           content.classList.add("show");
+          toggleSideNav(); // Меню плавно выезжает сразу после раскрытия секции
         }, 260);
+      } else {
+        toggleSideNav(); // Обычное переключение
       }
     }
 
@@ -494,11 +510,10 @@
       });
     });
 
-    /* === ЛОГИКА ДЛЯ БОКОВЫХ ШОРТКАТОВ (РАЗДЕЛ III) === */
+    /* ЛОГИКА ДЛЯ БОКОВЫХ ШОРТКАТОВ */
     const sideBtns = document.querySelectorAll(".side-btn");
     const subSections = document.querySelectorAll(".sub-section");
 
-    // 1. Плавный скролл при клике по шорткату
     sideBtns.forEach(btn => {
       btn.addEventListener("click", () => {
         const targetId = btn.dataset.target;
@@ -509,10 +524,8 @@
       });
     });
 
-    // 2. Отслеживание скролла (чтобы кнопка сама загоралась, когда листаешь)
     const observerOptions = {
       root: null,
-      // Триггер срабатывает, когда секция примерно посередине экрана
       rootMargin: "-40% 0px -40% 0px",
       threshold: 0
     };
