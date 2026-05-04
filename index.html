@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Допы на Генерала</title>
+  <title>Three Tabs</title>
   <style>
     * {
       box-sizing: border-box;
@@ -287,7 +287,6 @@
       margin-bottom: 0;
     }
 
-    /* Рамочка для каждого под-модуля */
     .sub-panel {
       border: 1px solid var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
@@ -309,7 +308,6 @@
       font-weight: 600;
     }
 
-    /* Уменьшенный плейсхолдер внутри рамочек */
     .sub-panel .placeholder {
       min-height: 180px; 
       border-radius: 16px;
@@ -318,22 +316,19 @@
     /* === БОКОВОЕ МЕНЮ === */
     .side-nav {
       position: fixed;
-      right: 12px; /* Прижато к самому правому краю экрана */
+      right: 12px;
       top: 50%;
       z-index: 100;
       display: flex;
       flex-direction: column;
       gap: 12px;
       
-      /* Анимация скрытия: меню спрятано за правой границей */
       transform: translateY(-50%) translateX(150px);
       opacity: 0;
       pointer-events: none;
-      /* cubic-bezier дает эффект небольшого отскока (пружинки) при появлении */
       transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2), opacity 0.4s ease;
     }
 
-    /* Класс для отображения меню */
     .side-nav.show {
       transform: translateY(-50%) translateX(0);
       opacity: 1;
@@ -345,115 +340,10 @@
       padding: 10px 0;
       font-size: 20px;
       text-align: center;
-      border-radius: 16px; /* Чуть сильнее скругляем края для эстетики сбоку */
+      border-radius: 16px;
     }
 
-    @media (max-width: 1400px) {
-      .side-nav { right: 8px; }
-    }
-
-    @media (max-width: 900px) {
-      .intro h1 { font-size: 42px; }
-      .tab-btn.large {
-        min-width: 140px; font-size: 32px; padding: 24px 26px;
-      }
-      .grid { grid-template-columns: 1fr; }
-      .side-nav { display: none; }
-    }
-
-    @media (max-width: 640px) {
-      .site { padding-left: 14px; padding-right: 14px; }
-      .intro h1 { font-size: 34px; }
-      .tabs-start { width: 100%; flex-direction: column; }
-      .tab-btn.large, .tab-btn.small { width: 100%; }
-      .topbar-inner { width: 100%; border-radius: 24px; }
-      .sub-panel { padding: 16px; }
-    }
     /* === ДОПЫ И АВТОРСКАЯ ПОДПИСЬ === */
-    .content-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 10px;
-      margin-bottom: 50px;
-      animation: fadeIn 0.8s ease;
-    }
-
-    .header-title {
-      font-size: 46px; /* Сделал чуть крупнее, как на скрине */
-      font-weight: 800;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-shadow: var(--glow);
-      margin: 0 0 4px 0;
-    }
-
-    .header-author-wrap {
-      position: relative; /* Делаем обертку относительной, чтобы привязать к ней подпись */
-      display: inline-block;
-    }
-
-    .by-text {
-      color: var(--muted);
-      font-size: 16px;
-      letter-spacing: 0.3em; /* Растянул буквы пошире */
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    .signature {
-      font-family: 'Great Vibes', cursive; /* Не забудь, что должен быть импорт шрифта в самом верху <style> */
-      font-size: 28px; /* Сделал меньше */
-      color: #fff;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-      /* Позиционируем подпись в углу */
-      position: absolute;
-      right: -60px; /* Выносим за правый край текста */
-      bottom: -12px; /* Опускаем чуть ниже текста */
-      transform: rotate(-10deg); /* Красивый наклон */
-      pointer-events: none;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Боковое меню -->
-  <div id="sideNav" class="side-nav">
-    <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
-    <button class="tab-btn small side-btn" data-target="sub-2">II</button>
-    <button class="tab-btn small side-btn" data-target="sub-3">III</button>
-    <button class="tab-btn small side-btn" data-target="sub-4">IV</button>
-    <button class="tab-btn small side-btn" data-target="sub-5">V</button>
-    <button class="tab-btn small side-btn" data-target="sub-6">VI</button>
-  </div>
-
-  <div class="site">
-    <div id="topbar" class="topbar">
-      <div class="topbar-inner">
-        <button class="tab-btn small active" data-tab="tab1">I</button>
-        <button class="tab-btn small" data-tab="tab2">II</button>
-        <button class="tab-btn small" data-tab="tab3">III</button>
-      </div>
-    </div>
-
-    <section id="hero" class="hero">
-      <div class="center-wrap">
-        <div id="intro" class="intro">
-          <h1>Допы</h1>
-          <p>Выбери вопрос</p>
-        </div>
-
-        <div id="startTabs" class="tabs-start">
-          <button class="tab-btn large active" data-tab="tab1">I</button>
-          <button class="tab-btn large" data-tab="tab2">II</button>
-          <button class="tab-btn large" data-tab="tab3">III</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="content" class="content">
- /* === ДОПЫ И АВТОРСКАЯ ПОДПИСЬ === */
     .content-header {
       display: flex;
       flex-direction: column;
@@ -487,24 +377,94 @@
     }
 
     .signature {
-      /* Возвращаем стандартный шрифт твоего сайта */
       font-family: inherit; 
-      font-size: 12px; /* Делаем подпись поменьше */
+      font-size: 12px;
       color: var(--text); 
       letter-spacing: 0.1em;
       
-      /* Позиционируем ровно в правый нижний угол текста BY QEOZAN */
       position: absolute;
       right: 0; 
       bottom: -18px; 
       
-      opacity: 0.5; /* Слегка приглушаем, чтобы не отвлекало внимание */
+      opacity: 0.5;
       pointer-events: none;
     }
+
+    @media (max-width: 1400px) {
+      .side-nav { right: 8px; }
+    }
+
+    @media (max-width: 900px) {
+      .intro h1 { font-size: 42px; }
+      .tab-btn.large {
+        min-width: 140px; font-size: 32px; padding: 24px 26px;
+      }
+      .grid { grid-template-columns: 1fr; }
+      .side-nav { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .site { padding-left: 14px; padding-right: 14px; }
+      .intro h1 { font-size: 34px; }
+      .tabs-start { width: 100%; flex-direction: column; }
+      .tab-btn.large, .tab-btn.small { width: 100%; }
+      .topbar-inner { width: 100%; border-radius: 24px; }
+      .sub-panel { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Боковое меню -->
+  <div id="sideNav" class="side-nav">
+    <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
+    <button class="tab-btn small side-btn" data-target="sub-2">II</button>
+    <button class="tab-btn small side-btn" data-target="sub-3">III</button>
+    <button class="tab-btn small side-btn" data-target="sub-4">IV</button>
+    <button class="tab-btn small side-btn" data-target="sub-5">V</button>
+    <button class="tab-btn small side-btn" data-target="sub-6">VI</button>
+    <button class="tab-btn small side-btn" data-target="sub-7">VII</button>
+  </div>
+
+  <div class="site">
+    <div id="topbar" class="topbar">
+      <div class="topbar-inner">
+        <button class="tab-btn small active" data-tab="tab1">I</button>
+        <button class="tab-btn small" data-tab="tab2">II</button>
+        <button class="tab-btn small" data-tab="tab3">III</button>
+      </div>
+    </div>
+
+    <section id="hero" class="hero">
+      <div class="center-wrap">
+        <div id="intro" class="intro">
+          <h1>MENU</h1>
+          <p>выбери раздел</p>
+        </div>
+
+        <div id="startTabs" class="tabs-start">
+          <button class="tab-btn large active" data-tab="tab1">I</button>
+          <button class="tab-btn large" data-tab="tab2">II</button>
+          <button class="tab-btn large" data-tab="tab3">III</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="content" class="content">
+
+      <!-- Надпись Допы и подпись -->
+      <div class="content-header">
+        <div class="header-title">Допы</div>
+        <div class="header-author-wrap">
+          <div class="by-text">BY QEOZAN</div>
+          <div class="signature">Q`zan</div>
+        </div>
+      </div>
+
       <div id="tab1" class="tab-panel active">
         <div class="panel">
           <div class="panel-head">
-            <h2 class="panel-title">Вопрос I</h2>
+            <h2 class="panel-title">SECTION I</h2>
             <div class="panel-mark">I</div>
           </div>
           <div class="grid">
@@ -520,7 +480,7 @@
       <div id="tab2" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
-            <h2 class="panel-title">Вопрос II</h2>
+            <h2 class="panel-title">SECTION II</h2>
             <div class="panel-mark">II</div>
           </div>
           <div class="placeholder">Большое поле под контент</div>
@@ -530,7 +490,7 @@
       <div id="tab3" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
-            <h2 class="panel-title">Вопрос III</h2>
+            <h2 class="panel-title">SECTION III</h2>
             <div class="panel-mark">III</div>
           </div>
           
@@ -538,45 +498,51 @@
             <!-- Под-модули обернуты в sub-panel -->
             <div id="sub-1" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">Meria</h3>
+                <h3 class="sub-section-title">Раздел I</h3>
                 <div class="placeholder">Контент первого под-пункта...</div>
               </div>
             </div>
             
             <div id="sub-2" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">FBI</h3>
+                <h3 class="sub-section-title">Раздел II</h3>
                 <div class="placeholder">Контент второго под-пункта...</div>
               </div>
             </div>
             
             <div id="sub-3" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">CPD</h3>
+                <h3 class="sub-section-title">Раздел III</h3>
                 <div class="placeholder">Контент третьего под-пункта...</div>
               </div>
             </div>
             
             <div id="sub-4" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">Hospital</h3>
+                <h3 class="sub-section-title">Раздел IV</h3>
                 <div class="placeholder">Контент четвертого под-пункта...</div>
               </div>
             </div>
             
             <div id="sub-5" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">SMI</h3>
+                <h3 class="sub-section-title">Раздел V</h3>
                 <div class="placeholder">Контент пятого под-пункта...</div>
               </div>
             </div>
             
             <div id="sub-6" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">University</h3>
+                <h3 class="sub-section-title">Раздел VI</h3>
                 <div class="placeholder">Контент шестого под-пункта...</div>
               </div>
             </div>
+            
+            <div id="sub-7" class="sub-section">
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел VII</h3>
+                <div class="placeholder">Контент седьмого под-пункта...</div>
+              </div>
             </div>
           </div>
         </div>
