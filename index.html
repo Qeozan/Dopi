@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Three Tabs</title>
-
   <style>
     * {
       box-sizing: border-box;
@@ -273,12 +272,161 @@
         transform: translateY(0);
       }
     }
+
+    @media (max-width: 900px) {
+      .intro h1 {
+        font-size: 42px;
+      }
+
+      .tab-btn.large {
+        min-width: 140px;
+        font-size: 32px;
+        padding: 24px 26px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .intro h1 {
+        font-size: 34px;
+      }
+
+      .tabs-start {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .tab-btn.large,
+      .tab-btn.small {
+        width: 100%;
+      }
+
+      .topbar-inner {
+        width: 100%;
+        border-radius: 24px;
+      }
+    }
   </style>
 </head>
-
 <body>
+  <div class="site">
+    <div id="topbar" class="topbar">
+      <div class="topbar-inner">
+        <button class="tab-btn small active" data-tab="tab1">I</button>
+        <button class="tab-btn small" data-tab="tab2">II</button>
+        <button class="tab-btn small" data-tab="tab3">III</button>
+      </div>
+    </div>
 
-<!-- дальше у тебя HTML + JS как был -->
+    <section id="hero" class="hero">
+      <div class="center-wrap">
+        <div id="intro" class="intro">
+          <h1>MENU</h1>
+          <p>выбери раздел</p>
+        </div>
 
+        <div id="startTabs" class="tabs-start">
+          <button class="tab-btn large active" data-tab="tab1">I</button>
+          <button class="tab-btn large" data-tab="tab2">II</button>
+          <button class="tab-btn large" data-tab="tab3">III</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="content" class="content">
+      <div id="tab1" class="tab-panel active">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">SECTION I</h2>
+            <div class="panel-mark">I</div>
+          </div>
+          <div class="grid">
+            <div class="placeholder">Поле под основной контент</div>
+            <div class="stack">
+              <div class="placeholder">Поле 1</div>
+              <div class="placeholder">Поле 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab2" class="tab-panel">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">SECTION II</h2>
+            <div class="panel-mark">II</div>
+          </div>
+          <div class="placeholder">Большое поле под контент</div>
+        </div>
+      </div>
+
+      <div id="tab3" class="tab-panel">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">SECTION III</h2>
+            <div class="panel-mark">III</div>
+          </div>
+          <div class="grid">
+            <div class="placeholder">Левое поле</div>
+            <div class="placeholder">Правое поле</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const startTabs = document.getElementById("startTabs");
+    const topbar = document.getElementById("topbar");
+    const hero = document.getElementById("hero");
+    const intro = document.getElementById("intro");
+    const content = document.getElementById("content");
+
+    const allButtons = document.querySelectorAll("[data-tab]");
+    const panels = document.querySelectorAll(".tab-panel");
+
+    let firstOpen = true;
+
+    function setActive(tabId) {
+      allButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tabId);
+      });
+
+      panels.forEach(panel => {
+        panel.classList.toggle("active", panel.id === tabId);
+      });
+    }
+
+    function openTab(tabId) {
+      setActive(tabId);
+
+      if (firstOpen) {
+        firstOpen = false;
+
+        startTabs.classList.add("fly-up");
+        intro.classList.add("hide");
+        hero.classList.add("compact");
+
+        setTimeout(() => {
+          topbar.classList.add("show");
+          content.classList.add("show");
+        }, 260);
+      }
+    }
+
+    allButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        openTab(btn.dataset.tab);
+      });
+    });
+  </script>
 </body>
 </html>
