@@ -3,255 +3,276 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tabs UI</title>
 
 <style>
-* { box-sizing: border-box; }
-
 :root {
-  --bg-1: #0a0a0f;
-  --bg-2: #12121a;
-  --panel: rgba(255, 255, 255, 0.05);
-  --panel-strong: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.12);
-  --border-active: rgba(255, 255, 255, 0.28);
-  --text: #f3f3f7;
-  --muted: #a4a4b3;
+  --bg-1:#0a0a0f;
+  --bg-2:#12121a;
+  --panel:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.12);
+  --text:#f3f3f7;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: var(--text);
-  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(var(--bg-1),var(--bg-2));
+  color:var(--text);
 }
 
-.site {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+/* HERO */
+.hero {
+  height:70vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:.6s;
 }
+.hero.compact { height:120px; }
 
-/* TOP TABS */
-
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  margin-bottom: 20px;
+.tabs-start {
+  display:flex;
+  gap:20px;
+  transition:.6s;
 }
-
-.topbar-inner {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background: rgba(0,0,0,0.6);
+.tabs-start.fly-up {
+  transform:translateY(-80px) scale(.8);
+  opacity:0;
 }
 
 .tab-btn {
-  padding: 10px 20px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: var(--text);
-  cursor: pointer;
+  padding:30px;
+  font-size:40px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:white;
+  cursor:pointer;
 }
 
-.tab-btn.active {
-  background: var(--panel-strong);
-  border-color: var(--border-active);
+/* TOPBAR */
+.topbar {
+  position:sticky;
+  top:0;
+  opacity:0;
+  transition:.5s;
+}
+.topbar.show { opacity:1; }
+
+.topbar-inner {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  padding:10px;
+}
+
+.tab-btn.small {
+  font-size:20px;
+  padding:10px;
 }
 
 /* CONTENT */
+.content { opacity:0; transition:.5s; }
+.content.show { opacity:1; }
 
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
 
 .panel {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:20px;
 }
 
-.placeholder {
-  padding: 40px;
-  border: 1px dashed var(--border);
-  text-align: center;
-  color: var(--muted);
-}
-
-/* SUB TABS */
-
-.sub-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 20px;
+/* RIGHT SUB TABS */
+.sub-wrap {
+  display:grid;
+  grid-template-columns:1fr 80px;
+  gap:20px;
 }
 
 .sub-tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
 .sub-btn {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: var(--text);
-  cursor: pointer;
+  aspect-ratio:1;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  cursor:pointer;
 }
 
 .sub-btn.active {
-  background: var(--panel-strong);
-  border-color: var(--border-active);
+  background:#ffffff22;
 }
 
-.sub-panel {
-  display: none;
-}
-
-.sub-panel.active {
-  display: block;
-}
+.sub-panel { display:none; }
+.sub-panel.active { display:block; }
 
 .sub-panel img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  width:100%;
+  border-radius:10px;
+  margin-bottom:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="site">
-
-  <!-- TOP MENU -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <button class="tab-btn active" data-tab="tab1">I</button>
-      <button class="tab-btn" data-tab="tab2">II</button>
-      <button class="tab-btn" data-tab="tab3">III</button>
-    </div>
+<!-- TOP SMALL -->
+<div id="topbar" class="topbar">
+  <div class="topbar-inner">
+    <button class="tab-btn small active" data-tab="tab1">I</button>
+    <button class="tab-btn small" data-tab="tab2">II</button>
+    <button class="tab-btn small" data-tab="tab3">III</button>
   </div>
+</div>
 
-  <!-- CONTENT -->
-  <div id="tab1" class="tab-panel active">
-    <div class="panel">
-      <div class="placeholder">Контент первой вкладки</div>
-    </div>
+<!-- HERO -->
+<div id="hero" class="hero">
+  <div id="startTabs" class="tabs-start">
+    <button class="tab-btn" data-tab="tab1">I</button>
+    <button class="tab-btn" data-tab="tab2">II</button>
+    <button class="tab-btn" data-tab="tab3">III</button>
   </div>
+</div>
 
-  <div id="tab2" class="tab-panel">
-    <div class="panel">
-      <div class="placeholder">Контент второй вкладки</div>
-    </div>
-  </div>
+<!-- CONTENT -->
+<div id="content" class="content">
 
-  <div id="tab3" class="tab-panel">
-    <div class="panel">
+<div id="tab1" class="tab-panel active">
+  <div class="panel">Контент 1</div>
+</div>
 
-      <div class="sub-layout">
+<div id="tab2" class="tab-panel">
+  <div class="panel">Контент 2</div>
+</div>
 
-        <!-- LEFT MENU -->
-        <div class="sub-tabs">
-          <button class="sub-btn active" data-sub="s1">Item 1</button>
-          <button class="sub-btn" data-sub="s2">Item 2</button>
-          <button class="sub-btn" data-sub="s3">Item 3</button>
-          <button class="sub-btn" data-sub="s4">Item 4</button>
-          <button class="sub-btn" data-sub="s5">Item 5</button>
-          <button class="sub-btn" data-sub="s6">Item 6</button>
-          <button class="sub-btn" data-sub="s7">Item 7</button>
-          <button class="sub-btn" data-sub="s8">Item 8</button>
+<div id="tab3" class="tab-panel">
+  <div class="panel">
+
+    <div class="sub-wrap">
+
+      <!-- CONTENT -->
+      <div>
+
+        <div id="s1" class="sub-panel active">
+          <img src="https://via.placeholder.com/400">
+          <p>Item I</p>
         </div>
 
-        <!-- RIGHT CONTENT -->
-        <div>
+        <div id="s2" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item II</p>
+        </div>
 
-          <div id="s1" class="sub-panel active">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 1</p>
-          </div>
+        <div id="s3" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item III</p>
+        </div>
 
-          <div id="s2" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 2</p>
-          </div>
+        <div id="s4" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item IV</p>
+        </div>
 
-          <div id="s3" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 3</p>
-          </div>
+        <div id="s5" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item V</p>
+        </div>
 
-          <div id="s4" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 4</p>
-          </div>
+        <div id="s6" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item VI</p>
+        </div>
 
-          <div id="s5" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 5</p>
-          </div>
+        <div id="s7" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item VII</p>
+        </div>
 
-          <div id="s6" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 6</p>
-          </div>
-
-          <div id="s7" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 7</p>
-          </div>
-
-          <div id="s8" class="sub-panel">
-            <img src="https://via.placeholder.com/400">
-            <p>Описание Item 8</p>
-          </div>
-
+        <div id="s8" class="sub-panel">
+          <img src="https://via.placeholder.com/400">
+          <p>Item VIII</p>
         </div>
 
       </div>
 
+      <!-- RIGHT MINI TABS -->
+      <div class="sub-tabs">
+        <button class="sub-btn active" data-sub="s1">I</button>
+        <button class="sub-btn" data-sub="s2">II</button>
+        <button class="sub-btn" data-sub="s3">III</button>
+        <button class="sub-btn" data-sub="s4">IV</button>
+        <button class="sub-btn" data-sub="s5">V</button>
+        <button class="sub-btn" data-sub="s6">VI</button>
+        <button class="sub-btn" data-sub="s7">VII</button>
+        <button class="sub-btn" data-sub="s8">VIII</button>
+      </div>
+
     </div>
+
   </div>
+</div>
 
 </div>
 
 <script>
+const startTabs = document.getElementById("startTabs");
+const topbar = document.getElementById("topbar");
+const hero = document.getElementById("hero");
+const content = document.getElementById("content");
 
-/* MAIN TABS */
-const tabButtons = document.querySelectorAll(".tab-btn");
-const tabPanels = document.querySelectorAll(".tab-panel");
+const allButtons = document.querySelectorAll("[data-tab]");
+const panels = document.querySelectorAll(".tab-panel");
 
-tabButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    tabButtons.forEach(b => b.classList.remove("active"));
-    tabPanels.forEach(p => p.classList.remove("active"));
+let firstOpen = true;
 
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.tab).classList.add("active");
-  });
+function setActive(tabId) {
+  allButtons.forEach(btn =>
+    btn.classList.toggle("active", btn.dataset.tab === tabId)
+  );
+  panels.forEach(panel =>
+    panel.classList.toggle("active", panel.id === tabId)
+  );
+}
+
+function openTab(tabId) {
+  setActive(tabId);
+
+  if (firstOpen) {
+    firstOpen = false;
+
+    startTabs.classList.add("fly-up");
+    hero.classList.add("compact");
+
+    setTimeout(() => {
+      topbar.classList.add("show");
+      content.classList.add("show");
+    }, 300);
+  }
+}
+
+allButtons.forEach(btn => {
+  btn.addEventListener("click", () => openTab(btn.dataset.tab));
 });
 
-/* SUB TABS */
-const subButtons = document.querySelectorAll(".sub-btn");
+/* SUB */
+const subBtns = document.querySelectorAll(".sub-btn");
 const subPanels = document.querySelectorAll(".sub-panel");
 
-subButtons.forEach(btn => {
+subBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    subButtons.forEach(b => b.classList.remove("active"));
+    subBtns.forEach(b => b.classList.remove("active"));
     subPanels.forEach(p => p.classList.remove("active"));
 
     btn.classList.add("active");
     document.getElementById(btn.dataset.sub).classList.add("active");
   });
 });
-
 </script>
 
 </body>
