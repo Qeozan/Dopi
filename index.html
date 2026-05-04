@@ -350,9 +350,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: -50px;
       margin-bottom: 50px;
       animation: fadeIn 0.8s ease;
+      
+      /* Добавляем вот эти две строчки: */
+      position: relative;
+      top: -30px; /* Чем больше минус, тем выше поднимется весь блок */
     }
 
     .header-title {
