@@ -41,50 +41,13 @@
       padding: 28px 20px 60px;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      padding-top: 6px;
-      margin-bottom: 20px;
-      opacity: 0;
-      transform: translateY(-25px);
-      pointer-events: none;
-      transition: 0.5s ease;
-    }
-
-    .topbar.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .topbar-inner {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      padding: 12px;
-      border: 1px solid var(--border);
-      background: rgba(10, 10, 15, 0.72);
-      backdrop-filter: blur(14px);
-      border-radius: 999px;
-      box-shadow: var(--glow);
-      width: fit-content;
-      margin: 0 auto;
-    }
-
     .hero {
-      min-height: 68vh;
+      min-height: 20vh;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: min-height 0.6s ease, padding 0.6s ease;
-    }
-
-    .hero.compact {
-      min-height: 0;
-      padding-top: 10px;
-      padding-bottom: 10px;
+      margin-bottom: 40px;
     }
 
     .center-wrap {
@@ -93,18 +56,10 @@
       flex-direction: column;
       align-items: center;
       gap: 26px;
-      transition: 0.6s ease;
     }
 
     .intro {
       text-align: center;
-      transition: 0.4s ease;
-    }
-
-    .intro.hide {
-      opacity: 0;
-      transform: translateY(-10px);
-      pointer-events: none;
     }
 
     .intro h1 {
@@ -127,13 +82,6 @@
       gap: 18px;
       flex-wrap: wrap;
       justify-content: center;
-      transition: transform 0.7s ease, opacity 0.45s ease;
-    }
-
-    .tabs-start.fly-up {
-      transform: translateY(-80px) scale(0.92);
-      opacity: 0;
-      pointer-events: none;
     }
 
     .tab-btn {
@@ -179,16 +127,7 @@
     }
 
     .content {
-      opacity: 0;
-      transform: translateY(20px);
       transition: 0.45s ease;
-      pointer-events: none;
-    }
-
-    .content.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
     }
 
     .panel {
@@ -219,41 +158,6 @@
       font-weight: 700;
     }
 
-    .panel-mark {
-      color: var(--muted);
-      font-size: 14px;
-      letter-spacing: 0.25em;
-    }
-
-    .placeholder {
-      min-height: 260px;
-      border: 1px dashed rgba(255, 255, 255, 0.18);
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      text-align: center;
-      padding: 24px;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,0.03),
-          rgba(255,255,255,0.015)
-        );
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-    }
-
-    .stack {
-      display: grid;
-      gap: 20px;
-    }
-
     .tab-panel {
       display: none;
       animation: fadeIn 0.35s ease;
@@ -264,13 +168,62 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- НОВЫЕ СТИЛИ ДЛЯ ПОД-ВКЛАДОК --- */
+    .sub-tabs-container {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .sub-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sub-image {
+      width: 100%;
+      height: 250px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+    }
+
+    .sub-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sub-description {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .sub-panel {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .sub-panel.active {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .sub-tabs-container {
+        grid-template-columns: 1fr;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .sub-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        order: -1;
       }
     }
   </style>
@@ -278,7 +231,128 @@
 
 <body>
 
-<!-- дальше у тебя HTML + JS как был -->
+  <div class="site">
+    <div class="hero">
+      <div class="center-wrap">
+        <div class="intro">
+          <h1>THE SYSTEM</h1>
+          <p>Выберите модуль для настройки</p>
+        </div>
+
+        <!-- Главные табы -->
+        <div class="tabs-start">
+          <button class="tab-btn large active" onclick="openMainTab(event, 'main-1')">01</button>
+          <button class="tab-btn large" onclick="openMainTab(event, 'main-2')">02</button>
+          <button class="tab-btn large" onclick="openMainTab(event, 'main-3')">03</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content show">
+      
+      <!-- Вкладка 1 -->
+      <div id="main-1" class="tab-panel active">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Модуль 01</h2>
+          </div>
+          <p style="color: var(--muted);">Здесь контент первой главной вкладки...</p>
+        </div>
+      </div>
+
+      <!-- Вкладка 2 -->
+      <div id="main-2" class="tab-panel">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Модуль 02</h2>
+          </div>
+          <p style="color: var(--muted);">Здесь контент второй главной вкладки...</p>
+        </div>
+      </div>
+
+      <!-- Вкладка 3 (с под-вкладками) -->
+      <div id="main-3" class="tab-panel">
+        <div class="panel">
+          <div class="sub-tabs-container">
+            
+            <!-- Контент под-вкладок (слева) -->
+            <div class="sub-content-area">
+              
+              <div class="sub-panel active" id="sub-1">
+                <h3 class="panel-title">Система охлаждения</h3>
+                <div class="sub-image">
+                  <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80" alt="Фото 1">
+                </div>
+                <p class="sub-description">Детальное описание первого пункта. Картинка автоматически подстраивается под блок, а текст идет следом.</p>
+              </div>
+
+              <div class="sub-panel" id="sub-2">
+                <h3 class="panel-title">Энергоблок</h3>
+                <div class="sub-image">
+                  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Фото 2">
+                </div>
+                <p class="sub-description">Второй пункт. Здесь можно разместить любую другую информацию, она плавно появится при клике на "02" справа.</p>
+              </div>
+
+              <!-- Для примера добавил только 2 контентных блока, чтобы не раздувать код до бесконечности. 
+                   Остальные 6 блоков (id="sub-3" до "sub-8") создаются точно по такому же шаблону. -->
+              <div class="sub-panel" id="sub-3"><h3 class="panel-title">Блок 03</h3><p class="sub-description">Контент 3...</p></div>
+              <div class="sub-panel" id="sub-4"><h3 class="panel-title">Блок 04</h3><p class="sub-description">Контент 4...</p></div>
+              <div class="sub-panel" id="sub-5"><h3 class="panel-title">Блок 05</h3><p class="sub-description">Контент 5...</p></div>
+              <div class="sub-panel" id="sub-6"><h3 class="panel-title">Блок 06</h3><p class="sub-description">Контент 6...</p></div>
+              <div class="sub-panel" id="sub-7"><h3 class="panel-title">Блок 07</h3><p class="sub-description">Контент 7...</p></div>
+              <div class="sub-panel" id="sub-8"><h3 class="panel-title">Блок 08</h3><p class="sub-description">Контент 8...</p></div>
+
+            </div>
+
+            <!-- Кнопки под-вкладок (справа) -->
+            <div class="sub-nav">
+              <button class="tab-btn small active" onclick="openSubTab(event, 'sub-1')">01</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-2')">02</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-3')">03</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-4')">04</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-5')">05</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-6')">06</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-7')">07</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-8')">08</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Скрипт для главных вкладок (01, 02, 03)
+    function openMainTab(event, tabId) {
+      document.querySelectorAll('.site > .content > .tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.querySelectorAll('.tabs-start .tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // Скрипт для под-вкладок внутри 3-го модуля
+    function openSubTab(event, subTabId) {
+      const container = event.currentTarget.closest('.sub-tabs-container');
+      
+      container.querySelectorAll('.sub-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      container.querySelectorAll('.sub-nav .tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      document.getElementById(subTabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
