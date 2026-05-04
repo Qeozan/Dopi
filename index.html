@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Допы на Генерала</title>
   <style>
-    @import url('[https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap](https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap)');
     * {
       box-sizing: border-box;
     }
@@ -454,14 +453,54 @@
     </section>
 
     <section id="content" class="content">
-  <!-- Надпись Допы и подпись -->
-      <div class="content-header">
-        <div class="header-title">Допы</div>
-        <div class="header-author-wrap">
-          <div class="by-text">BY QEOZAN</div>
-          <div class="signature">Q`zan</div>
-        </div>
-      </div>
+ /* === ДОПЫ И АВТОРСКАЯ ПОДПИСЬ === */
+    .content-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 50px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .header-title {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-shadow: var(--glow);
+      margin: 0 0 4px 0;
+    }
+
+    .header-author-wrap {
+      position: relative; 
+      display: inline-block;
+    }
+
+    .by-text {
+      color: var(--muted);
+      font-size: 16px;
+      letter-spacing: 0.3em; 
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .signature {
+      /* Возвращаем стандартный шрифт твоего сайта */
+      font-family: inherit; 
+      font-size: 12px; /* Делаем подпись поменьше */
+      color: var(--text); 
+      letter-spacing: 0.1em;
+      
+      /* Позиционируем ровно в правый нижний угол текста BY QEOZAN */
+      position: absolute;
+      right: 0; 
+      bottom: -18px; 
+      
+      opacity: 0.5; /* Слегка приглушаем, чтобы не отвлекало внимание */
+      pointer-events: none;
+    }
       <div id="tab1" class="tab-panel active">
         <div class="panel">
           <div class="panel-head">
