@@ -379,17 +379,17 @@
     }
 
     .signature {
-      font-family: 'Great Vibes', cursive; /* Красивый шрифт */
-      font-size: 32px; /* Увеличенный размер */
+      font-family: 'Great Vibes', cursive; 
+      font-size: 32px; 
       color: #fff; 
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Свечение */
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); 
       
-      /* Позиционируем снизу с правого края */
       position: absolute;
       right: -40px; 
-      bottom: -22px; 
+      /* Опустили подпись ниже, чтобы не перекрывала текст */
+      bottom: -38px; 
       
-      transform: rotate(-10deg); /* Легкий наклон */
+      transform: rotate(-10deg); 
       pointer-events: none;
     }
 
