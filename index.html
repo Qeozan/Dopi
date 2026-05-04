@@ -277,45 +277,65 @@
       }
     }
 
-    /* === СТИЛИ ДЛЯ ТРЕТЬЕГО РАЗДЕЛА === */
+    /* === СТИЛИ ДЛЯ ТРЕТЬЕГО РАЗДЕЛА (ПОД-МОДУЛИ) === */
     .sub-section {
-      min-height: 60vh;
-      margin-bottom: 30px;
       scroll-margin-top: 100px;
+      margin-bottom: 24px;
     }
     
     .sub-section:last-child {
       margin-bottom: 0;
     }
 
+    /* Рамочка для каждого под-модуля */
+    .sub-panel {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius: 20px;
+      padding: 24px;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .sub-panel:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), transparent);
+    }
+
     .sub-section-title {
-      margin: 0 0 15px 0;
+      margin: 0 0 16px 0;
       font-size: 20px;
       color: var(--text);
       letter-spacing: 0.05em;
       font-weight: 600;
     }
 
-    /* === БОКОВОЕ МЕНЮ (Вынесено отдельно) === */
+    /* Уменьшенный плейсхолдер внутри рамочек */
+    .sub-panel .placeholder {
+      min-height: 180px; 
+      border-radius: 16px;
+    }
+
+    /* === БОКОВОЕ МЕНЮ === */
     .side-nav {
       position: fixed;
-      right: 20px; /* Прижимаем строго к правому краю монитора */
+      right: 12px; /* Прижато к самому правому краю экрана */
       top: 50%;
       z-index: 100;
       display: flex;
       flex-direction: column;
       gap: 12px;
       
-      /* Анимация: по умолчанию меню спрятано за правым краем и прозрачно */
-      transform: translate(150%, -50%);
+      /* Анимация скрытия: меню спрятано за правой границей */
+      transform: translateY(-50%) translateX(150px);
       opacity: 0;
       pointer-events: none;
-      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+      /* cubic-bezier дает эффект небольшого отскока (пружинки) при появлении */
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2), opacity 0.4s ease;
     }
 
-    /* Класс, который JS добавляет при открытии III вкладки */
+    /* Класс для отображения меню */
     .side-nav.show {
-      transform: translate(0, -50%);
+      transform: translateY(-50%) translateX(0);
       opacity: 1;
       pointer-events: auto;
     }
@@ -325,6 +345,11 @@
       padding: 10px 0;
       font-size: 20px;
       text-align: center;
+      border-radius: 16px; /* Чуть сильнее скругляем края для эстетики сбоку */
+    }
+
+    @media (max-width: 1400px) {
+      .side-nav { right: 8px; }
     }
 
     @media (max-width: 900px) {
@@ -333,8 +358,7 @@
         min-width: 140px; font-size: 32px; padding: 24px 26px;
       }
       .grid { grid-template-columns: 1fr; }
-      
-      .side-nav { display: none; } /* Прячем меню на мобилках */
+      .side-nav { display: none; }
     }
 
     @media (max-width: 640px) {
@@ -343,12 +367,13 @@
       .tabs-start { width: 100%; flex-direction: column; }
       .tab-btn.large, .tab-btn.small { width: 100%; }
       .topbar-inner { width: 100%; border-radius: 24px; }
+      .sub-panel { padding: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Боковое меню теперь лежит прямо в <body>, независимо от панелей контента -->
+  <!-- Боковое меню -->
   <div id="sideNav" class="side-nav">
     <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
     <button class="tab-btn small side-btn" data-target="sub-2">II</button>
@@ -418,33 +443,54 @@
           </div>
           
           <div class="sub-sections-wrapper">
+            <!-- Под-модули обернуты в sub-panel -->
             <div id="sub-1" class="sub-section">
-              <h3 class="sub-section-title">Раздел I</h3>
-              <div class="placeholder">Контент первого под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел I</h3>
+                <div class="placeholder">Контент первого под-пункта...</div>
+              </div>
             </div>
+            
             <div id="sub-2" class="sub-section">
-              <h3 class="sub-section-title">Раздел II</h3>
-              <div class="placeholder">Контент второго под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел II</h3>
+                <div class="placeholder">Контент второго под-пункта...</div>
+              </div>
             </div>
+            
             <div id="sub-3" class="sub-section">
-              <h3 class="sub-section-title">Раздел III</h3>
-              <div class="placeholder">Контент третьего под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел III</h3>
+                <div class="placeholder">Контент третьего под-пункта...</div>
+              </div>
             </div>
+            
             <div id="sub-4" class="sub-section">
-              <h3 class="sub-section-title">Раздел IV</h3>
-              <div class="placeholder">Контент четвертого под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел IV</h3>
+                <div class="placeholder">Контент четвертого под-пункта...</div>
+              </div>
             </div>
+            
             <div id="sub-5" class="sub-section">
-              <h3 class="sub-section-title">Раздел V</h3>
-              <div class="placeholder">Контент пятого под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел V</h3>
+                <div class="placeholder">Контент пятого под-пункта...</div>
+              </div>
             </div>
+            
             <div id="sub-6" class="sub-section">
-              <h3 class="sub-section-title">Раздел VI</h3>
-              <div class="placeholder">Контент шестого под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел VI</h3>
+                <div class="placeholder">Контент шестого под-пункта...</div>
+              </div>
             </div>
+            
             <div id="sub-7" class="sub-section">
-              <h3 class="sub-section-title">Раздел VII</h3>
-              <div class="placeholder">Контент седьмого под-пункта...</div>
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Раздел VII</h3>
+                <div class="placeholder">Контент седьмого под-пункта...</div>
+              </div>
             </div>
           </div>
         </div>
@@ -478,7 +524,7 @@
     function openTab(tabId) {
       setActive(tabId);
 
-      // Функция вызова бокового меню (только для 3 вкладки)
+      // Управление появлением бокового меню с анимацией
       const toggleSideNav = () => {
         if (tabId === "tab3") {
           sideNav.classList.add("show");
@@ -497,10 +543,10 @@
         setTimeout(() => {
           topbar.classList.add("show");
           content.classList.add("show");
-          toggleSideNav(); // Меню плавно выезжает сразу после раскрытия секции
+          toggleSideNav(); 
         }, 260);
       } else {
-        toggleSideNav(); // Обычное переключение
+        toggleSideNav(); 
       }
     }
 
