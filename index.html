@@ -370,6 +370,46 @@
       .topbar-inner { width: 100%; border-radius: 24px; }
       .sub-panel { padding: 16px; }
     }
+    /* === ДОПЫ И АВТОРСКАЯ ПОДПИСЬ === */
+    .content-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      margin-bottom: 40px; /* Отступ вниз до самих рамочек с контентом */
+      animation: fadeIn 0.8s ease;
+    }
+
+    .header-title {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-shadow: var(--glow);
+    }
+
+    .header-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-author .by-text {
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .header-author .signature {
+      font-family: 'Great Vibes', cursive; /* Тот самый шрифт с завитками */
+      font-size: 36px;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px) rotate(-5deg); /* Слегка наклонили и подняли для эстетики */
+    }
   </style>
 </head>
 <body>
@@ -409,6 +449,14 @@
     </section>
 
     <section id="content" class="content">
+      <!-- Надпись Допы и подпись -->
+      <div class="content-header">
+        <div class="header-title">Допы</div>
+        <div class="header-author">
+          <span class="by-text">by Qeozan</span>
+          <span class="signature">Q`zan</span>
+        </div>
+      </div>
       <div id="tab1" class="tab-panel active">
         <div class="panel">
           <div class="panel-head">
