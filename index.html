@@ -3,196 +3,142 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Three Tabs</title>
+  <title>System Tabs</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    /* ===== ТВОИ БАЗОВЫЕ НАСТРОЙКИ ===== */
     :root {
-      --bg-1: #0a0a0f;
-      --bg-2: #12121a;
-      --panel: rgba(255, 255, 255, 0.05);
-      --panel-strong: rgba(255, 255, 255, 0.08);
-      --border: rgba(255, 255, 255, 0.12);
-      --border-active: rgba(255, 255, 255, 0.28);
-      --text: #f3f3f7;
-      --muted: #a4a4b3;
-      --glow: 0 0 30px rgba(255, 255, 255, 0.06);
-      --radius: 24px;
+      --bg: #000;
+      --panel: #0a0a0a;
+      --line: rgba(255,255,255,0.15);
+      --line-strong: rgba(255,255,255,0.35);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.5);
     }
 
+    /* УБИРАЕМ ВСЕ СКРУГЛЕНИЯ */
+    * {
+      border-radius: 0 !important;
+      box-sizing: border-box; /* Обязательно для правильных отступов */
+    }
+
+    /* фон */
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, #1b1b27 0%, transparent 35%),
-        radial-gradient(circle at top right, #161622 0%, transparent 30%),
-        linear-gradient(180deg, var(--bg-1), var(--bg-2));
-      overflow-x: hidden;
+      background: linear-gradient(180deg, #000, #050505 40%, #000);
     }
 
     .site {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 28px 20px 60px;
+      padding: 40px 20px;
     }
 
-    .hero {
-      min-height: 20vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: min-height 0.6s ease, padding 0.6s ease;
-      margin-bottom: 40px;
-    }
-
-    .center-wrap {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 26px;
-    }
-
-    .intro {
-      text-align: center;
-    }
-
-    .intro h1 {
-      margin: 0 0 10px;
-      font-size: 56px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
-
-    .intro p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .tabs-start {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .tab-btn {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
-      border-radius: 20px;
-      cursor: pointer;
-      transition: 0.25s ease;
-      backdrop-filter: blur(12px);
-    }
-
-    .tab-btn.large {
-      min-width: 180px;
-      padding: 30px 34px;
-      font-size: 42px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      box-shadow: var(--glow);
-    }
-
-    .tab-btn.small {
-      min-width: 84px;
-      padding: 12px 18px;
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-    }
-
-    .tab-btn:hover {
-      transform: translateY(-2px);
-      background: var(--panel-strong);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .tab-btn.active {
-      background: rgba(255, 255, 255, 0.11);
-      border-color: var(--border-active);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.04) inset,
-        0 10px 30px rgba(0,0,0,0.25),
-        0 0 25px rgba(255,255,255,0.08);
-    }
-
-    .content {
-      transition: 0.45s ease;
-    }
-
+    /* ===== ПАНЕЛИ ===== */
     .panel {
-      border: 1px solid var(--border);
-      background: linear-gradient(
-        180deg,
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0.03)
-      );
-      border-radius: 28px;
-      padding: 28px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.28);
+      background: #0a0a0a;
+      border: 1px solid var(--line);
+      padding: 0;
+      margin-bottom: 20px;
     }
 
     .panel-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      padding: 14px 18px;
+      background: #000;
     }
 
     .panel-title {
       margin: 0;
-      font-size: 28px;
-      letter-spacing: 0.08em;
-      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.2em;
     }
 
-    .tab-panel {
+    .panel-content {
+      padding: 20px;
+    }
+
+    /* ===== ГЛАВНАЯ НАВИГАЦИЯ ===== */
+    .tabs-start {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .tab-btn {
+      cursor: pointer;
+      color: var(--text);
+      transition: background 0.2s, border-color 0.2s;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .tab-btn.large {
+      border: 1px solid var(--line);
+      background: #000;
+      padding: 15px 30px;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+    }
+
+    .tab-btn.small {
+      background: #000;
+      border: 1px solid var(--line);
+      padding: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .tab-btn:hover {
+      background: #111;
+    }
+
+    .tab-btn.active {
+      background: #111;
+      border-color: var(--line-strong);
+    }
+
+    .tab-content-main {
       display: none;
-      animation: fadeIn 0.35s ease;
     }
 
-    .tab-panel.active {
+    .tab-content-main.active {
       display: block;
+      animation: fadeIn 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- НОВЫЕ СТИЛИ ДЛЯ ПОД-ВКЛАДОК --- */
+    /* ===== ПОД-ВКЛАДКИ (ДЛЯ 3-ГО БЛОКА) ===== */
     .sub-tabs-container {
       display: grid;
-      grid-template-columns: 1fr 100px;
-      gap: 30px;
-      align-items: start;
+      grid-template-columns: 1fr 60px; /* Контент занимает всё место, кнопки - 60px */
+      gap: 20px;
+      padding: 20px;
     }
 
     .sub-nav {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
+    }
+
+    .sub-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .sub-panel.active {
+      display: block;
     }
 
     .sub-image {
       width: 100%;
       height: 250px;
-      border-radius: 18px;
-      overflow: hidden;
-      margin: 20px 0;
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
+      margin: 15px 0;
+      background: #000;
     }
 
     .sub-image img {
@@ -203,20 +149,18 @@
 
     .sub-description {
       color: var(--muted);
-      line-height: 1.6;
-      font-size: 16px;
+      line-height: 1.5;
+      font-size: 15px;
+      margin: 0;
     }
 
-    .sub-panel {
-      display: none;
-      animation: fadeIn 0.4s ease;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    .sub-panel.active {
-      display: block;
-    }
-
-    @media (max-width: 768px) {
+    /* Адаптив: если экран узкий, кнопки под-вкладок уходят наверх */
+    @media (max-width: 600px) {
       .sub-tabs-container {
         grid-template-columns: 1fr;
       }
@@ -225,96 +169,98 @@
         flex-wrap: wrap;
         order: -1;
       }
+      .tab-btn.small {
+        flex: 1;
+      }
     }
   </style>
 </head>
-
 <body>
 
   <div class="site">
-    <div class="hero">
-      <div class="center-wrap">
-        <div class="intro">
-          <h1>THE SYSTEM</h1>
-          <p>Выберите модуль для настройки</p>
-        </div>
 
-        <!-- Главные табы -->
-        <div class="tabs-start">
-          <button class="tab-btn large active" onclick="openMainTab(event, 'main-1')">01</button>
-          <button class="tab-btn large" onclick="openMainTab(event, 'main-2')">02</button>
-          <button class="tab-btn large" onclick="openMainTab(event, 'main-3')">03</button>
-        </div>
-      </div>
+    <!-- ГЛАВНЫЕ КНОПКИ -->
+    <div class="tabs-start">
+      <button class="tab-btn large active" onclick="openMainTab(event, 'main-1')">БЛОК I</button>
+      <button class="tab-btn large" onclick="openMainTab(event, 'main-2')">БЛОК II</button>
+      <button class="tab-btn large" onclick="openMainTab(event, 'main-3')">БЛОК III</button>
     </div>
 
-    <div class="content show">
-      
-      <!-- Вкладка 1 -->
-      <div id="main-1" class="tab-panel active">
+    <!-- КОНТЕНТ ГЛАВНЫХ ВКЛАДОК -->
+    <div class="content">
+
+      <!-- Главная вкладка 1 -->
+      <div id="main-1" class="tab-content-main active">
         <div class="panel">
           <div class="panel-head">
-            <h2 class="panel-title">Модуль 01</h2>
+            <h2 class="panel-title">БЛОК I: ИНФОРМАЦИЯ</h2>
           </div>
-          <p style="color: var(--muted);">Здесь контент первой главной вкладки...</p>
+          <div class="panel-content">
+            <p style="color: var(--muted); margin: 0;">Здесь содержимое первой главной вкладки...</p>
+          </div>
         </div>
       </div>
 
-      <!-- Вкладка 2 -->
-      <div id="main-2" class="tab-panel">
+      <!-- Главная вкладка 2 -->
+      <div id="main-2" class="tab-content-main">
         <div class="panel">
           <div class="panel-head">
-            <h2 class="panel-title">Модуль 02</h2>
+            <h2 class="panel-title">БЛОК II: НАСТРОЙКИ</h2>
           </div>
-          <p style="color: var(--muted);">Здесь контент второй главной вкладки...</p>
+          <div class="panel-content">
+            <p style="color: var(--muted); margin: 0;">Здесь содержимое второй главной вкладки...</p>
+          </div>
         </div>
       </div>
 
-      <!-- Вкладка 3 (с под-вкладками) -->
-      <div id="main-3" class="tab-panel">
+      <!-- Главная вкладка 3 (с твоими 8 под-вкладками) -->
+      <div id="main-3" class="tab-content-main">
         <div class="panel">
+          
+          <div class="panel-head">
+            <h2 class="panel-title">БЛОК III: ДЕТАЛИЗАЦИЯ</h2>
+          </div>
+          
           <div class="sub-tabs-container">
             
-            <!-- Контент под-вкладок (слева) -->
+            <!-- Левая часть: Контент под-вкладок -->
             <div class="sub-content-area">
               
               <div class="sub-panel active" id="sub-1">
-                <h3 class="panel-title">Система охлаждения</h3>
+                <h3 class="panel-title">РАЗДЕЛ I</h3>
                 <div class="sub-image">
-                  <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80" alt="Фото 1">
+                  <img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+01" alt="Фото 1">
                 </div>
-                <p class="sub-description">Детальное описание первого пункта. Картинка автоматически подстраивается под блок, а текст идет следом.</p>
+                <p class="sub-description">Описание первого раздела. Строгий стиль, без скруглений, точные линии.</p>
               </div>
 
               <div class="sub-panel" id="sub-2">
-                <h3 class="panel-title">Энергоблок</h3>
+                <h3 class="panel-title">РАЗДЕЛ II</h3>
                 <div class="sub-image">
-                  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Фото 2">
+                  <img src="https://via.placeholder.com/800x400/0a0a0a/ffffff?text=IMG+02" alt="Фото 2">
                 </div>
-                <p class="sub-description">Второй пункт. Здесь можно разместить любую другую информацию, она плавно появится при клике на "02" справа.</p>
+                <p class="sub-description">Описание второго раздела. Картинка подстраивается по ширине.</p>
               </div>
 
-              <!-- Для примера добавил только 2 контентных блока, чтобы не раздувать код до бесконечности. 
-                   Остальные 6 блоков (id="sub-3" до "sub-8") создаются точно по такому же шаблону. -->
-              <div class="sub-panel" id="sub-3"><h3 class="panel-title">Блок 03</h3><p class="sub-description">Контент 3...</p></div>
-              <div class="sub-panel" id="sub-4"><h3 class="panel-title">Блок 04</h3><p class="sub-description">Контент 4...</p></div>
-              <div class="sub-panel" id="sub-5"><h3 class="panel-title">Блок 05</h3><p class="sub-description">Контент 5...</p></div>
-              <div class="sub-panel" id="sub-6"><h3 class="panel-title">Блок 06</h3><p class="sub-description">Контент 6...</p></div>
-              <div class="sub-panel" id="sub-7"><h3 class="panel-title">Блок 07</h3><p class="sub-description">Контент 7...</p></div>
-              <div class="sub-panel" id="sub-8"><h3 class="panel-title">Блок 08</h3><p class="sub-description">Контент 8...</p></div>
+              <div class="sub-panel" id="sub-3"><h3 class="panel-title">РАЗДЕЛ III</h3><p class="sub-description">Текст для третьего раздела...</p></div>
+              <div class="sub-panel" id="sub-4"><h3 class="panel-title">РАЗДЕЛ IV</h3><p class="sub-description">Текст для четвертого раздела...</p></div>
+              <div class="sub-panel" id="sub-5"><h3 class="panel-title">РАЗДЕЛ V</h3><p class="sub-description">Текст для пятого раздела...</p></div>
+              <div class="sub-panel" id="sub-6"><h3 class="panel-title">РАЗДЕЛ VI</h3><p class="sub-description">Текст для шестого раздела...</p></div>
+              <div class="sub-panel" id="sub-7"><h3 class="panel-title">РАЗДЕЛ VII</h3><p class="sub-description">Текст для седьмого раздела...</p></div>
+              <div class="sub-panel" id="sub-8"><h3 class="panel-title">РАЗДЕЛ VIII</h3><p class="sub-description">Текст для восьмого раздела...</p></div>
 
             </div>
 
-            <!-- Кнопки под-вкладок (справа) -->
+            <!-- Правая часть: Кнопки навигации под-вкладок -->
             <div class="sub-nav">
-              <button class="tab-btn small active" onclick="openSubTab(event, 'sub-1')">01</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-2')">02</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-3')">03</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-4')">04</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-5')">05</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-6')">06</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-7')">07</button>
-              <button class="tab-btn small" onclick="openSubTab(event, 'sub-8')">08</button>
+              <button class="tab-btn small active" onclick="openSubTab(event, 'sub-1')">I</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-2')">II</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-3')">III</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-4')">IV</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-5')">V</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-6')">VI</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-7')">VII</button>
+              <button class="tab-btn small" onclick="openSubTab(event, 'sub-8')">VIII</button>
             </div>
 
           </div>
@@ -325,26 +271,25 @@
   </div>
 
   <script>
-    // Скрипт для главных вкладок (01, 02, 03)
+    // Функция для переключения главных вкладок (БЛОК I, II, III)
     function openMainTab(event, tabId) {
-      document.querySelectorAll('.site > .content > .tab-panel').forEach(panel => {
+      document.querySelectorAll('.tab-content-main').forEach(panel => {
         panel.classList.remove('active');
       });
-      document.querySelectorAll('.tabs-start .tab-btn').forEach(btn => {
+      document.querySelectorAll('.tabs-start .tab-btn.large').forEach(btn => {
         btn.classList.remove('active');
       });
       document.getElementById(tabId).classList.add('active');
       event.currentTarget.classList.add('active');
     }
 
-    // Скрипт для под-вкладок внутри 3-го модуля
+    // Функция для переключения под-вкладок (I, II, III... внутри БЛОКА III)
     function openSubTab(event, subTabId) {
       const container = event.currentTarget.closest('.sub-tabs-container');
       
       container.querySelectorAll('.sub-panel').forEach(panel => {
         panel.classList.remove('active');
       });
-      
       container.querySelectorAll('.sub-nav .tab-btn').forEach(btn => {
         btn.classList.remove('active');
       });
