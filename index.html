@@ -325,10 +325,11 @@
 
     .sub-image {
       width: 100%;
-      height: 300px;
+      height: 350px; 
       object-fit: cover;
       display: block;
       transition: transform 0.4s ease;
+      cursor: zoom-in; 
     }
 
     .sub-image-wrapper:hover .sub-image {
@@ -482,6 +483,43 @@
       pointer-events: none;
     }
 
+    /* === ЛАЙТБОКС (УВЕЛИЧЕНИЕ ФОТО) === */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(5, 5, 8, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+      cursor: zoom-out; 
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+    }
+
+    .lightbox.active img {
+      transform: scale(1);
+    }
+
     @media (max-width: 1400px) {
       .side-nav { right: 8px; }
     }
@@ -507,6 +545,11 @@
   </style>
 </head>
 <body>
+
+  <!-- Модальное окно для полноэкранного просмотра картинок -->
+  <div class="lightbox" id="lightbox">
+    <img src="" id="lightboxImg" alt="Полный экран">
+  </div>
 
   <div id="sideNav" class="side-nav">
     <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
@@ -775,6 +818,24 @@
     }, observerOptions);
 
     subSections.forEach(sec => observer.observe(sec));
+
+    /* ЛОГИКА ДЛЯ ЛАЙТБОКСА (УВЕЛИЧЕНИЕ ФОТО ПО КЛИКУ) */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const subImages = document.querySelectorAll('.sub-image');
+
+    subImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    // Закрываем окно при клике в любое место
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+
   </script>
 </body>
 </html>
