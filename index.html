@@ -417,6 +417,78 @@
       .topbar-inner { width: 100%; border-radius: 24px; }
       .sub-panel { padding: 16px; }
     }
+    /* === СТИЛИ ДЛЯ ФОТО И ФРАКЦИЙ (ВНУТРИ ПОД-МОДУЛЕЙ) === */
+    .sub-image-wrapper {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .sub-image {
+      width: 100%;
+      height: 300px; /* Фиксированная высота, чтобы все фотки были одинаковыми */
+      object-fit: cover; /* Изображение будет красиво обрезаться без искажений */
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    /* Легкий эффект зума при наведении на фотку */
+    .sub-image-wrapper:hover .sub-image {
+      transform: scale(1.03);
+    }
+
+    .faction-block {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .faction-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 20px 0;
+      /* Та самая красная полоска слева */
+      border-left: 4px solid #e74c3c; 
+      padding-left: 14px;
+      line-height: 1.2;
+    }
+
+    .faction-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .faction-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faction-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Кастомная точка для списка как на скрине */
+    .faction-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #fff;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -500,51 +572,105 @@
           </div>
           
           <div class="sub-sections-wrapper">
+            <!-- БЛОК 1: MERIA -->
             <div id="sub-1" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">Meria</h3>
-                <div class="placeholder">Контент первого под-пункта...</div>
+                <div class="sub-image-wrapper">
+                  <!-- Сюда вставишь ссылку на свою картинку из майнкрафта -->
+                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="Meria" class="sub-image">
+                </div>
+                
+                <div class="faction-block">
+                  <h4 class="faction-title">🏢 Взаимодействие с Мэрией / Правительством</h4>
+                  <ul class="faction-list">
+                    <li>Губернатор является главнокомандующим всеми силовыми структурами, включая армию.</li>
+                    <li>Мэрия регулярно проводит проверки компетентности состава и профессионализма руководства армии.</li>
+                    <li>Телохранители Правительства проходят курс физической подготовки на территории военной базы.</li>
+                    <li>При объявлении военного положения армия приступает к устранению внутренних угроз по всему штату.</li>
+                    <li>При объявлении комендантского часа армия вправе оказать содействие правоохранительным органам.</li>
+                    <li>Правительство выделяет из государственного бюджета средства на обеспечение армии.</li>
+                  </ul>
+                </div>
               </div>
             </div>
             
+            <!-- БЛОК 2: FBI -->
             <div id="sub-2" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">FBI</h3>
-                <div class="placeholder">Контент второго под-пункта...</div>
+                <div class="sub-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="FBI" class="sub-image">
+                </div>
+                <div class="faction-block">
+                  <h4 class="faction-title">🕵️ Взаимодействие с FBI</h4>
+                  <ul class="faction-list">
+                    <li>Текст для FBI (вставь сюда свой текст по шаблону).</li>
+                    <li>Текст для FBI (вставь сюда свой текст по шаблону).</li>
+                  </ul>
+                </div>
               </div>
             </div>
             
+            <!-- БЛОК 3: CPD -->
             <div id="sub-3" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">CPD</h3>
-                <div class="placeholder">Контент третьего под-пункта...</div>
+                <div class="sub-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="CPD" class="sub-image">
+                </div>
+                <div class="faction-block">
+                  <h4 class="faction-title">🚓 Взаимодействие с CPD</h4>
+                  <ul class="faction-list">
+                    <li>Текст для CPD (вставь сюда свой текст).</li>
+                  </ul>
+                </div>
               </div>
             </div>
             
+            <!-- БЛОК 4: Hospital -->
             <div id="sub-4" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">Hospital</h3>
-                <div class="placeholder">Контент четвертого под-пункта...</div>
+                <div class="sub-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="Hospital" class="sub-image">
+                </div>
+                <div class="faction-block">
+                  <h4 class="faction-title">🏥 Взаимодействие с Hospital</h4>
+                  <ul class="faction-list">
+                    <li>Текст для Больницы (вставь сюда свой текст).</li>
+                  </ul>
+                </div>
               </div>
             </div>
             
+            <!-- БЛОК 5: SMI -->
             <div id="sub-5" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">SMI</h3>
-                <div class="placeholder">Контент пятого под-пункта...</div>
+                <div class="sub-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="SMI" class="sub-image">
+                </div>
+                <div class="faction-block">
+                  <h4 class="faction-title">📡 Взаимодействие с SMI</h4>
+                  <ul class="faction-list">
+                    <li>Текст для СМИ (вставь сюда свой текст).</li>
+                  </ul>
+                </div>
               </div>
             </div>
             
+            <!-- БЛОК 6: University -->
             <div id="sub-6" class="sub-section">
               <div class="sub-panel">
-                <h3 class="sub-section-title">University</h3>
-                <div class="placeholder">Контент шестого под-пункта...</div>
+                <div class="sub-image-wrapper">
+                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="University" class="sub-image">
+                </div>
+                <div class="faction-block">
+                  <h4 class="faction-title">🎓 Взаимодействие с University</h4>
+                  <ul class="faction-list">
+                    <li>Текст для Университета (вставь сюда свой текст).</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
   </div>
 
   <script>
