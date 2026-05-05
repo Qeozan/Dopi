@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Допы на Генерала</title>
   <style>
+    /* Подключаем два шрифта: один для подписи (Great Vibes), другой для текста фракций (Montserrat) */
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
     * {
       box-sizing: border-box;
@@ -310,9 +312,94 @@
       font-weight: 600;
     }
 
-    .sub-panel .placeholder {
-      min-height: 180px; 
+    /* === СТИЛИ ДЛЯ ФОТО И ФРАКЦИЙ === */
+    .sub-image-wrapper {
+      width: 100%;
       border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .sub-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .sub-image-wrapper:hover .sub-image {
+      transform: scale(1.03);
+    }
+
+    .faction-block {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      /* Новый красивый шрифт для текста фракций */
+      font-family: 'Montserrat', sans-serif; 
+    }
+
+    .faction-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 20px 0;
+      padding-left: 16px; 
+      line-height: 1.2;
+    }
+
+    /* Главная черно-серая полоска у заголовка */
+    .faction-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #8a8a99, #2a2a35);
+      box-shadow: 0 0 10px rgba(138, 138, 153, 0.4);
+    }
+
+    .faction-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .faction-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .faction-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Светящиеся градиентные полосочки вместо точек у подпунктов */
+    .faction-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 12px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #7a7a8c, #30303d);
+      box-shadow: 0 0 8px rgba(122, 122, 140, 0.6);
     }
 
     /* === БОКОВОЕ МЕНЮ === */
@@ -353,9 +440,8 @@
       margin-bottom: 50px;
       animation: fadeIn 0.8s ease;
       
-      /* Добавляем вот эти две строчки: */
       position: relative;
-      top: -70px; /* Чем больше минус, тем выше поднимется весь блок */
+      top: -70px;
     }
 
     .header-title {
@@ -389,7 +475,6 @@
       
       position: absolute;
       right: -40px; 
-      /* Опустили подпись ниже, чтобы не перекрывала текст */
       bottom: -38px; 
       
       transform: rotate(-10deg); 
@@ -416,78 +501,7 @@
       .tab-btn.large, .tab-btn.small { width: 100%; }
       .topbar-inner { width: 100%; border-radius: 24px; }
       .sub-panel { padding: 16px; }
-    }
-    /* === СТИЛИ ДЛЯ ФОТО И ФРАКЦИЙ (ВНУТРИ ПОД-МОДУЛЕЙ) === */
-    .sub-image-wrapper {
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-    }
-
-    .sub-image {
-      width: 100%;
-      height: 300px; /* Фиксированная высота, чтобы все фотки были одинаковыми */
-      object-fit: cover; /* Изображение будет красиво обрезаться без искажений */
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    /* Легкий эффект зума при наведении на фотку */
-    .sub-image-wrapper:hover .sub-image {
-      transform: scale(1.03);
-    }
-
-    .faction-block {
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.03);
-    }
-
-    .faction-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      margin: 0 0 20px 0;
-      /* Та самая красная полоска слева */
-      border-left: 4px solid #e74c3c; 
-      padding-left: 14px;
-      line-height: 1.2;
-    }
-
-    .faction-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .faction-list li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 16px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .faction-list li:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Кастомная точка для списка как на скрине */
-    .faction-list li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #fff;
-      font-size: 16px;
+      .sub-image { height: 200px; } /* Делаем фотки чуть ниже на мобилках */
     }
   </style>
 </head>
@@ -572,12 +586,14 @@
           </div>
           
           <div class="sub-sections-wrapper">
-            <!-- БЛОК 1: MERIA -->
+            
+            <!-- БЛОК 1: МЭРИЯ -->
             <div id="sub-1" class="sub-section">
               <div class="sub-panel">
+                <h3 class="sub-section-title">Мэрия</h3>
+                
                 <div class="sub-image-wrapper">
-                  <!-- Сюда вставишь ссылку на свою картинку из майнкрафта -->
-                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="Meria" class="sub-image">
+                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+МЭРИИ" alt="Мэрия" class="sub-image">
                 </div>
                 
                 <div class="faction-block">
@@ -597,14 +613,17 @@
             <!-- БЛОК 2: FBI -->
             <div id="sub-2" class="sub-section">
               <div class="sub-panel">
+                <h3 class="sub-section-title">FBI</h3>
+                
                 <div class="sub-image-wrapper">
-                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="FBI" class="sub-image">
+                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+FBI" alt="FBI" class="sub-image">
                 </div>
+                
                 <div class="faction-block">
                   <h4 class="faction-title">🕵️ Взаимодействие с FBI</h4>
                   <ul class="faction-list">
-                    <li>Текст для FBI (вставь сюда свой текст по шаблону).</li>
-                    <li>Текст для FBI (вставь сюда свой текст по шаблону).</li>
+                    <li>Текст для FBI (вставь сюда свой текст).</li>
+                    <li>Текст для FBI (вставь сюда свой текст).</li>
                   </ul>
                 </div>
               </div>
@@ -613,9 +632,12 @@
             <!-- БЛОК 3: CPD -->
             <div id="sub-3" class="sub-section">
               <div class="sub-panel">
+                <h3 class="sub-section-title">CPD</h3>
+                
                 <div class="sub-image-wrapper">
-                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="CPD" class="sub-image">
+                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+CPD" alt="CPD" class="sub-image">
                 </div>
+                
                 <div class="faction-block">
                   <h4 class="faction-title">🚓 Взаимодействие с CPD</h4>
                   <ul class="faction-list">
@@ -625,14 +647,17 @@
               </div>
             </div>
             
-            <!-- БЛОК 4: Hospital -->
+            <!-- БЛОК 4: БОЛЬНИЦА -->
             <div id="sub-4" class="sub-section">
               <div class="sub-panel">
+                <h3 class="sub-section-title">Больница</h3>
+                
                 <div class="sub-image-wrapper">
-                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="Hospital" class="sub-image">
+                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+БОЛЬНИЦЫ" alt="Больница" class="sub-image">
                 </div>
+                
                 <div class="faction-block">
-                  <h4 class="faction-title">🏥 Взаимодействие с Hospital</h4>
+                  <h4 class="faction-title">🏥 Взаимодействие с Больницей</h4>
                   <ul class="faction-list">
                     <li>Текст для Больницы (вставь сюда свой текст).</li>
                   </ul>
@@ -643,9 +668,12 @@
             <!-- БЛОК 5: SMI -->
             <div id="sub-5" class="sub-section">
               <div class="sub-panel">
+                <h3 class="sub-section-title">SMI</h3>
+                
                 <div class="sub-image-wrapper">
-                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="SMI" class="sub-image">
+                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+SMI" alt="SMI" class="sub-image">
                 </div>
+                
                 <div class="faction-block">
                   <h4 class="faction-title">📡 Взаимодействие с SMI</h4>
                   <ul class="faction-list">
@@ -655,22 +683,28 @@
               </div>
             </div>
             
-            <!-- БЛОК 6: University -->
+            <!-- БЛОК 6: УНИВЕРСИТЕТ -->
             <div id="sub-6" class="sub-section">
               <div class="sub-panel">
+                <h3 class="sub-section-title">Университет</h3>
+                
                 <div class="sub-image-wrapper">
-                  <img src="https://images.unsplash.com/photo-1627393100177-b4297e5b6def?auto=format&fit=crop&w=1200&q=80" alt="University" class="sub-image">
+                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+УНИВЕРСИТЕТА" alt="Университет" class="sub-image">
                 </div>
+                
                 <div class="faction-block">
-                  <h4 class="faction-title">🎓 Взаимодействие с University</h4>
+                  <h4 class="faction-title">🎓 Взаимодействие с Университетом</h4>
                   <ul class="faction-list">
                     <li>Текст для Университета (вставь сюда свой текст).</li>
                   </ul>
                 </div>
               </div>
             </div>
+            
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
