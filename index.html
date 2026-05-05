@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Допы на Генерала</title>
   <style>
-    /* Подключаем два шрифта: один для подписи (Great Vibes), другой для текста фракций (Montserrat) */
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
@@ -39,6 +38,7 @@
         radial-gradient(circle at top left, #1b1b27 0%, transparent 35%),
         radial-gradient(circle at top right, #161622 0%, transparent 30%),
         linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      background-attachment: fixed; 
       overflow-x: hidden;
     }
 
@@ -339,7 +339,6 @@
       border-radius: 16px;
       padding: 24px;
       border: 1px solid rgba(255, 255, 255, 0.03);
-      /* Новый красивый шрифт для текста фракций */
       font-family: 'Montserrat', sans-serif; 
     }
 
@@ -356,7 +355,6 @@
       line-height: 1.2;
     }
 
-    /* Главная черно-серая полоска у заголовка */
     .faction-title::before {
       content: '';
       position: absolute;
@@ -389,7 +387,6 @@
       margin-bottom: 0;
     }
 
-    /* Светящиеся градиентные полосочки вместо точек у подпунктов */
     .faction-list li::before {
       content: '';
       position: absolute;
@@ -469,9 +466,12 @@
 
     .signature {
       font-family: 'Great Vibes', cursive; 
-      font-size: 32px; 
+      font-size: 34px; 
       color: #fff; 
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); 
+      text-shadow: 
+        0 0 8px rgba(255, 255, 255, 0.8),
+        0 0 16px rgba(255, 255, 255, 0.6),
+        0 0 24px rgba(255, 255, 255, 0.4); 
       
       position: absolute;
       right: -40px; 
@@ -501,13 +501,12 @@
       .tab-btn.large, .tab-btn.small { width: 100%; }
       .topbar-inner { width: 100%; border-radius: 24px; }
       .sub-panel { padding: 16px; }
-      .sub-image { height: 200px; } /* Делаем фотки чуть ниже на мобилках */
+      .sub-image { height: 200px; } 
     }
   </style>
 </head>
 <body>
 
-  <!-- Боковое меню -->
   <div id="sideNav" class="side-nav">
     <button class="tab-btn small side-btn active" data-target="sub-1">I</button>
     <button class="tab-btn small side-btn" data-target="sub-2">II</button>
@@ -543,7 +542,6 @@
 
     <section id="content" class="content">
 
-      <!-- Надпись Допы и подпись -->
       <div class="content-header">
         <div class="header-title">Допы</div>
         <div class="header-author-wrap">
@@ -587,17 +585,14 @@
           
           <div class="sub-sections-wrapper">
             
-            <!-- БЛОК 1: МЭРИЯ -->
             <div id="sub-1" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Мэрия</h3>
-                
                 <div class="sub-image-wrapper">
-                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+МЭРИИ" alt="Мэрия" class="sub-image">
+                  <img src="file:///C:/Users/Admin/AppData/Roaming/PrismLauncher/instances/1.20.4(4)/minecraft/screenshots/2026-05-04_20.51.39.png" alt="Мэрия" class="sub-image">
                 </div>
-                
                 <div class="faction-block">
-                  <h4 class="faction-title">🏢 Взаимодействие с Мэрией / Правительством</h4>
+                  <h4 class="faction-title">Взаимодействие с Мэрией / Правительством</h4>
                   <ul class="faction-list">
                     <li>Губернатор является главнокомандующим всеми силовыми структурами, включая армию.</li>
                     <li>Мэрия регулярно проводит проверки компетентности состава и профессионализма руководства армии.</li>
@@ -610,17 +605,14 @@
               </div>
             </div>
             
-            <!-- БЛОК 2: FBI -->
             <div id="sub-2" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">FBI</h3>
-                
                 <div class="sub-image-wrapper">
-                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+FBI" alt="FBI" class="sub-image">
+                  <img src="file:///C:/Users/Admin/AppData/Roaming/PrismLauncher/instances/1.20.4(4)/minecraft/screenshots/2026-05-04_20.51.39.png" alt="FBI" class="sub-image">
                 </div>
-                
                 <div class="faction-block">
-                  <h4 class="faction-title">🕵️ Взаимодействие с FBI</h4>
+                  <h4 class="faction-title">Взаимодействие с FBI</h4>
                   <ul class="faction-list">
                     <li>Текст для FBI (вставь сюда свой текст).</li>
                     <li>Текст для FBI (вставь сюда свой текст).</li>
@@ -629,17 +621,14 @@
               </div>
             </div>
             
-            <!-- БЛОК 3: CPD -->
             <div id="sub-3" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">CPD</h3>
-                
                 <div class="sub-image-wrapper">
-                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+CPD" alt="CPD" class="sub-image">
+                  <img src="file:///C:/Users/Admin/AppData/Roaming/PrismLauncher/instances/1.20.4(4)/minecraft/screenshots/2026-05-04_20.51.39.png" alt="CPD" class="sub-image">
                 </div>
-                
                 <div class="faction-block">
-                  <h4 class="faction-title">🚓 Взаимодействие с CPD</h4>
+                  <h4 class="faction-title">Взаимодействие с CPD</h4>
                   <ul class="faction-list">
                     <li>Текст для CPD (вставь сюда свой текст).</li>
                   </ul>
@@ -647,17 +636,14 @@
               </div>
             </div>
             
-            <!-- БЛОК 4: БОЛЬНИЦА -->
             <div id="sub-4" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Больница</h3>
-                
                 <div class="sub-image-wrapper">
-                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+БОЛЬНИЦЫ" alt="Больница" class="sub-image">
+                  <img src="file:///C:/Users/Admin/AppData/Roaming/PrismLauncher/instances/1.20.4(4)/minecraft/screenshots/2026-05-04_20.51.39.png" alt="Больница" class="sub-image">
                 </div>
-                
                 <div class="faction-block">
-                  <h4 class="faction-title">🏥 Взаимодействие с Больницей</h4>
+                  <h4 class="faction-title">Взаимодействие с Больницей</h4>
                   <ul class="faction-list">
                     <li>Текст для Больницы (вставь сюда свой текст).</li>
                   </ul>
@@ -665,17 +651,14 @@
               </div>
             </div>
             
-            <!-- БЛОК 5: SMI -->
             <div id="sub-5" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">SMI</h3>
-                
                 <div class="sub-image-wrapper">
-                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+SMI" alt="SMI" class="sub-image">
+                  <img src="file:///C:/Users/Admin/AppData/Roaming/PrismLauncher/instances/1.20.4(4)/minecraft/screenshots/2026-05-04_20.51.39.png" alt="SMI" class="sub-image">
                 </div>
-                
                 <div class="faction-block">
-                  <h4 class="faction-title">📡 Взаимодействие с SMI</h4>
+                  <h4 class="faction-title">Взаимодействие с SMI</h4>
                   <ul class="faction-list">
                     <li>Текст для СМИ (вставь сюда свой текст).</li>
                   </ul>
@@ -683,17 +666,14 @@
               </div>
             </div>
             
-            <!-- БЛОК 6: УНИВЕРСИТЕТ -->
             <div id="sub-6" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Университет</h3>
-                
                 <div class="sub-image-wrapper">
-                  <img src="https://placehold.co/1200x300/1a1a24/a4a4b3?text=СКРИНШОТ+УНИВЕРСИТЕТА" alt="Университет" class="sub-image">
+                  <img src="file:///C:/Users/Admin/AppData/Roaming/PrismLauncher/instances/1.20.4(4)/minecraft/screenshots/2026-05-04_20.51.39.png" alt="Университет" class="sub-image">
                 </div>
-                
                 <div class="faction-block">
-                  <h4 class="faction-title">🎓 Взаимодействие с Университетом</h4>
+                  <h4 class="faction-title">Взаимодействие с Университетом</h4>
                   <ul class="faction-list">
                     <li>Текст для Университета (вставь сюда свой текст).</li>
                   </ul>
