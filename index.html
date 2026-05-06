@@ -34,7 +34,8 @@
       color: var(--text);
       background-color: var(--bg-1);
       background-attachment: fixed; 
-      overflow-x: hidden;
+      /* Блокируем скролл изначально */
+      overflow: hidden; 
     }
 
     /* === ЧЕТКИЙ ФОН ИЗ КАРТИНКИ === */
@@ -113,7 +114,7 @@
     }
 
     .hero {
-      min-height: 68vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -225,7 +226,7 @@
       transform: translateY(20px);
       transition: 0.45s ease;
       pointer-events: none;
-      flex-grow: 1; /* Чтобы контент растягивался, а футер был внизу */
+      flex-grow: 1; 
     }
 
     .content.show {
@@ -268,30 +269,6 @@
       letter-spacing: 0.25em;
     }
 
-    .placeholder {
-      min-height: 260px;
-      border: 1px dashed rgba(255, 255, 255, 0.18);
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      text-align: center;
-      padding: 24px;
-      background: rgba(255,255,255,0.02);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-    }
-
-    .stack {
-      display: grid;
-      gap: 20px;
-    }
-
     .tab-panel {
       display: none;
       animation: fadeIn 0.35s ease;
@@ -316,7 +293,6 @@
       margin-bottom: 0;
     }
 
-    /* Стеклянные карточки под-модулей */
     .sub-panel {
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -331,7 +307,7 @@
 
     .sub-panel:hover {
       border-color: rgba(255, 255, 255, 0.15);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
     }
 
     .sub-section-title {
@@ -534,15 +510,14 @@
       pointer-events: none;
     }
 
-    /* === ФУТЕР (ВНИЗУ САЙТА) === */
+    /* === ФУТЕР === */
     .footer {
       margin-top: 60px;
       padding: 30px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-top: 1px solid rgba(255, 255, 255, 0.15);
-      background: linear-gradient(180deg, rgba(20, 20, 30, 0.25), rgba(10, 10, 15, 0.4));
+      background: rgba(20, 20, 30, 0.3);
       backdrop-filter: blur(20px) saturate(120%);
-      -webkit-backdrop-filter: blur(20px) saturate(120%);
       border-radius: 24px;
       text-align: center;
       color: var(--muted);
@@ -551,15 +526,12 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
-      /* Скрыт изначально вместе с контентом */
       opacity: 0;
       transform: translateY(20px);
       transition: 0.45s ease;
       pointer-events: none;
     }
 
-    /* Показываем футер вместе с контентом */
     .content.show + .footer {
       opacity: 1;
       transform: translateY(0);
@@ -583,18 +555,11 @@
       letter-spacing: 0.1em;
     }
 
-    .footer-links a:hover {
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255,255,255,0.4);
-    }
+    .footer-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
 
-    .footer-highlight {
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
+    .footer-highlight { color: #fff; font-weight: 700; }
 
-    /* === ЛАЙТБОКС (УВЕЛИЧЕНИЕ ФОТО) === */
+    /* === ЛАЙТБОКС === */
     .lightbox {
       position: fixed;
       top: 0;
@@ -603,7 +568,6 @@
       height: 100vh;
       background: rgba(5, 5, 8, 0.85);
       backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
       z-index: 9999;
       display: flex;
       align-items: center;
@@ -623,41 +587,31 @@
       max-width: 90vw;
       max-height: 90vh;
       border-radius: 12px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
       transform: scale(0.95);
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2);
     }
 
-    .lightbox.active img {
-      transform: scale(1);
-    }
+    .lightbox.active img { transform: scale(1); }
 
-    @media (max-width: 1400px) {
-      .side-nav { right: 8px; }
-    }
-
+    @media (max-width: 1400px) { .side-nav { right: 8px; } }
     @media (max-width: 900px) {
       .intro h1 { font-size: 42px; }
       .tab-btn.large { min-width: 140px; font-size: 32px; padding: 24px 26px; }
       .grid { grid-template-columns: 1fr; }
       .side-nav { display: none; }
     }
-
     @media (max-width: 640px) {
       .site { padding-left: 14px; padding-right: 14px; }
       .intro h1 { font-size: 34px; }
       .tabs-start { width: 100%; flex-direction: column; }
       .tab-btn.large, .tab-btn.small { width: 100%; }
       .topbar-inner { width: 100%; border-radius: 24px; }
-      .sub-panel { padding: 16px; }
-      .sub-image { height: 200px; } 
       .footer-links { flex-direction: column; gap: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Модальное окно для полноэкранного просмотра картинок -->
   <div class="lightbox" id="lightbox">
     <img src="" id="lightboxImg" alt="Полный экран">
   </div>
@@ -669,7 +623,6 @@
     <button class="tab-btn small side-btn" data-target="sub-4">IV</button>
     <button class="tab-btn small side-btn" data-target="sub-5">V</button>
     <button class="tab-btn small side-btn" data-target="sub-6">VI</button>
-    <!-- Добавили 7 кнопку для Общих взаимодействий -->
     <button class="tab-btn small side-btn" data-target="sub-7">VII</button>
   </div>
 
@@ -707,7 +660,6 @@
         </div>
       </div>
 
-      <!-- Вкладка I -->
       <div id="tab1" class="tab-panel active">
         <div class="panel">
           <div class="panel-head">
@@ -724,7 +676,6 @@
         </div>
       </div>
 
-      <!-- Вкладка II -->
       <div id="tab2" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -785,7 +736,6 @@
         </div>
       </div>
 
-      <!-- Вкладка III -->
       <div id="tab3" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -803,11 +753,9 @@
                 </div>
                 <div class="faction-block">
                   <h4 class="faction-title">Взаимодействие с Мэрией / Правительством</h4>
-                  
                   <div class="faction-lead">
                     Губернатор - главная вышестоящая фигура над всеми силовыми структурами.
                   </div>
-
                   <ul class="faction-list">
                     <li>Мэрия ведет постоянное наблюдение за всеми гос./сил. структурами, в том числе армией.</li>
                     <li>Сотрудники Правительства проводят регулярные проверки армии, для проверки их работы, знаний, и готовности к защите штата от угроз.</li>
@@ -828,16 +776,14 @@
                 </div>
                 <div class="faction-block">
                   <h4 class="faction-title">Взаимодействие с FBI</h4>
-                  
                   <div class="faction-lead">
                     Инспектор - является куратором всех силовых структур штата, и подчиняется Губернатору.
                   </div>
-
                   <ul class="faction-list">
                     <li>FBI обязаны предоставлять материальную помощь армии в виде материалов, по их запросу.</li>
                     <li>FBI могут позвать состав армии для оказания численного преимущества на рейде Гетто, при двух предварительных проигрышах.</li>
-                    <li>Состав Федерального Бюро Расследования ведет надзор над армией, проводя регулярные проверки на компетентность, а так же сообщая о любых нарушениях напрямую Генералу.</li>
-                    <li>Вызов сапёров FBI в экстренных ситуациях на военную базу, если сил сапёров армии не достаточно.</li>
+                    <li>Состав Федерального Бюро Расследования ведет надзор над армией, проводя регулярные проверки на компетентность.</li>
+                    <li>Вызов сапёров FBI в экстренных ситуациях на военную базу.</li>
                     <li>Проведение расследований на территории ВБ сотрудниками FBI.</li>
                   </ul>
                 </div>
@@ -852,17 +798,15 @@
                 </div>
                 <div class="faction-block">
                   <h4 class="faction-title">Взаимодействие с CPD</h4>
-                  
                   <div class="faction-lead">
                     Шериф - управляющий Центральным полицейским департаментом, осуществляет защиту штата от преступности.
                   </div>
-
                   <ul class="faction-list">
-                    <li>Шериф CPD в праве запросить помощь армии во время Ком.Часа, помогать или нет - дело армии.</li>
-                    <li>Отряд Спецназа в праве помочь армии в отбитии стратегических объектов после вызова в штат.</li>
-                    <li>Лейтенанты CPD проходят тест по умению пользования оружием на стрельбище Военной Базы.</li>
+                    <li>Шериф CPD в праве запросить помощь армии во время Ком.Часа.</li>
+                    <li>Отряд Спецназа в праве помочь армии в отбитии стратегических объектов.</li>
+                    <li>Лейтенанты CPD проходят тест по умению пользования оружием на стрельбище ВБ.</li>
                     <li>Ст. Лейтенанты CPD проходят курс физической подготовки на территории ВБ.</li>
-                    <li>CPD могут позвать состав армии для оказания численного преимущества на рейде Гетто, при двух предварительных проигрышах.</li>
+                    <li>CPD могут позвать состав армии на рейд Гетто при двух предварительных проигрышах.</li>
                   </ul>
                 </div>
               </div>
@@ -878,9 +822,9 @@
                   <h4 class="faction-title">Взаимодействие с Больницей</h4>
                   <ul class="faction-list">
                     <li>В больнице врачи на постоянной основе проводят мед. осмотры Рекрутов армии.</li>
-                    <li>Больница имеет свой отряд военных врачей, с доступом на ВБ, и специализацией в оказании помощи на ВБ.</li>
-                    <li>Армия часто осуществляет вызов врачей на ВБ, при различных ЧС, таких как: Пожары, Взрывы, Обвалы, и т.д.</li>
-                    <li>В связи с тем, что на стратегические объекты армии осуществляться постоянные нападение, в больницу постоянно поступают раненные, которым нужна помощь.</li>
+                    <li>Больница имеет свой отряд военных врачей с доступом на ВБ.</li>
+                    <li>Армия часто осуществляет вызов врачей на ВБ при различных ЧС.</li>
+                    <li>В связи с нападениями на объекты армии, в больницу постоянно поступают раненные.</li>
                   </ul>
                 </div>
               </div>
@@ -897,9 +841,9 @@
                   <ul class="faction-list">
                     <li>Сотрудники SMI могут оформлять совместные газеты с армией.</li>
                     <li>SMI периодично организовывают интервью с военнослужащими.</li>
-                    <li>Журналисты SMI проводят опросы в рядах армии, для сбора статистики, или улучшения их уровня службы.</li>
-                    <li>Контроль доступа SMI, к военным объектам и т.д. во избежание утечек.</li>
-                    <li>Найм военных журналистов для ведения прямых эфиров с места стычек с преступниками на территории штата, или на интернациональных операциях.</li>
+                    <li>Журналисты SMI проводят опросы в рядах армии.</li>
+                    <li>Контроль доступа SMI к военным объектам во избежание утечек.</li>
+                    <li>Найм военных журналистов для ведения прямых эфиров с мест стычек.</li>
                   </ul>
                 </div>
               </div>
@@ -914,7 +858,7 @@
                 <div class="faction-block">
                   <h4 class="faction-title">Взаимодействие с Университетом</h4>
                   <ul class="faction-list">
-                    <li>Генерал периодично проводит обучающие лекции в Университете, что бы заинтересовать потенциальных новобранцев.</li>
+                    <li>Генерал периодично проводит обучающие лекции в Университете.</li>
                     <li>Набор заинтересованных студентов на целевое обучение.</li>
                     <li>Декан может согласовать экскурсию для студентов по ВБ.</li>
                   </ul>
@@ -922,43 +866,35 @@
               </div>
             </div>
 
-            <!-- НОВЫЙ БЛОК БЕЗ ФОТО -->
             <div id="sub-7" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Общие положения</h3>
                 <div class="faction-block">
                   <h4 class="faction-title">Общеструктурные взаимодействия</h4>
-                  
                   <div class="faction-lead">
-                    Данные правила регламентируют базовые принципы взаимодействия армии со всеми остальными государственными структурами штата.
+                    Данные правила регламентируют базовые принципы взаимодействия армии со всеми остальными структурами штата.
                   </div>
-
                   <ul class="faction-list">
-                    <li>Вставь сюда свой текст для общеструктурных взаимодействий.</li>
-                    <li>Любой сотрудник гос. структур при нахождении на территории ВБ обязан подчиняться приказам старшего офицерского состава.</li>
-                    <li>Во время объявления режима ЧС на территории базы все гражданские лица, включая сотрудников других фракций без спец. допуска, обязаны покинуть территорию.</li>
-                    <li>Вставь сюда свой текст для общеструктурных взаимодействий.</li>
+                    <li>Любой сотрудник гос. структур при нахождении на ВБ обязан подчиняться приказам старших офицеров.</li>
+                    <li>При режиме ЧС все гражданские и сотрудники других фракций без допуска обязаны покинуть базу.</li>
+                    <li>Армия вправе ограничить доступ к секретным объектам для любых лиц по приказу руководства.</li>
                   </ul>
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
     </section>
 
-    <!-- СТЕКЛЯННЫЙ ФУТЕР -->
     <footer class="footer">
-      <div>&copy; 2024 <span class="footer-highlight">QEOZAN DEV</span>. Все права защищены.</div>
+      <div>&copy; 2026 <span class="footer-highlight">QEOZAN DEV</span>. Все права защищены.</div>
       <div>Специализированный портал для руководящего состава Армии.</div>
       <div class="footer-links">
-        <a href="#">Официальный форум</a>
-        <a href="#">Спец. связь (Discord)</a>
+        <a href="https://discord.com/users/463286386930483201" target="_blank">Спец. связь (Discord)</a>
         <a href="#">Устав Армии</a>
       </div>
     </footer>
-
   </div>
 
   <script>
@@ -978,7 +914,6 @@
       allButtons.forEach(btn => {
         btn.classList.toggle("active", btn.dataset.tab === tabId);
       });
-
       panels.forEach(panel => {
         panel.classList.toggle("active", panel.id === tabId);
       });
@@ -986,17 +921,16 @@
 
     function openTab(tabId) {
       setActive(tabId);
-
       const toggleSideNav = () => {
-        if (tabId === "tab3") {
-          sideNav.classList.add("show");
-        } else {
-          sideNav.classList.remove("show");
-        }
+        if (tabId === "tab3") sideNav.classList.add("show");
+        else sideNav.classList.remove("show");
       };
 
       if (firstOpen) {
         firstOpen = false;
+        
+        // Разблокируем скролл страницы
+        document.body.style.overflow = 'auto';
 
         startTabs.classList.add("fly-up");
         intro.classList.add("hide");
@@ -1013,9 +947,7 @@
     }
 
     allButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        openTab(btn.dataset.tab);
-      });
+      btn.addEventListener("click", () => openTab(btn.dataset.tab));
     });
 
     const sideBtns = document.querySelectorAll(".side-btn");
@@ -1025,47 +957,30 @@
       btn.addEventListener("click", () => {
         const targetId = btn.dataset.target;
         const targetEl = document.getElementById(targetId);
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        if (targetEl) targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-40% 0px -40% 0px",
-      threshold: 0
-    };
-
+    const observerOptions = { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          sideBtns.forEach(btn => {
-            btn.classList.toggle("active", btn.dataset.target === entry.target.id);
-          });
+          sideBtns.forEach(btn => btn.classList.toggle("active", btn.dataset.target === entry.target.id));
         }
       });
     }, observerOptions);
-
     subSections.forEach(sec => observer.observe(sec));
 
-    /* ЛОГИКА ДЛЯ ЛАЙТБОКСА (УВЕЛИЧЕНИЕ ФОТО ПО КЛИКУ) */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const subImages = document.querySelectorAll('.sub-image');
-
     subImages.forEach(img => {
       img.addEventListener('click', () => {
         lightboxImg.src = img.src;
         lightbox.classList.add('active');
       });
     });
-
-    // Закрываем окно при клике в любое место
-    lightbox.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-    });
-
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
   </script>
 </body>
 </html>
