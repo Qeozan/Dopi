@@ -463,6 +463,29 @@
       box-shadow: 0 0 8px rgba(155, 155, 174, 0.6);
     }
 
+    /* === СТИЛЬ ДЛЯ ВЛОЖЕННОГО СПИСКА (ТОЧКИ С ГРАДИЕНТОМ) === */
+    .nested-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 10px; /* Небольшой отступ от основного текста */
+    }
+
+    .nested-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      color: #b8b8c7;
+    }
+
+    /* Переопределяем полоску на красивую круглую точку */
+    .faction-list .nested-list li::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      top: 9px;
+      /* Градиент и свечение наследуются от основного li::before */
+    }
+
     .code-green { color: #4ade80; font-weight: 600; text-shadow: 0 0 8px rgba(74, 222, 128, 0.4); }
     .code-yellow { color: #facc15; font-weight: 600; text-shadow: 0 0 8px rgba(250, 204, 21, 0.4); }
     .code-red { color: #f87171; font-weight: 600; text-shadow: 0 0 8px rgba(248, 113, 113, 0.4); }
@@ -502,7 +525,7 @@
       flex-direction: column;
       align-items: center;
       margin-bottom: 50px;
-      margin-top: 20px; /* <--- ИСПРАВЛЕНИЕ: БОЛЬШЕ НЕТ НАЕЗДА МЕНЮ */
+      margin-top: 20px; 
       animation: fadeIn 0.8s ease;
       position: relative;
     }
@@ -743,8 +766,11 @@
                 <li><strong>Задачи:</strong> Охрана стратегического объекта и прилегающей территории. Включает обход стратегического объекта каждые 5 минут. Минимальное звание — Сержант.</li>
                 <li><strong>Длительность:</strong> Стандартный пост длится 15 минут с обязательными докладами.</li>
                 <li><strong>Стратегические объекты:</strong>
-                  <br><span style="margin-left: 10px;">— Авианосец</span>
-                  <br><span style="margin-left: 10px;">— Основной склад</span>
+                  <!-- Вложенный список с градиентными точками вместо тире -->
+                  <ul class="nested-list">
+                    <li>Авианосец</li>
+                    <li>Основной склад</li>
+                  </ul>
                 </li>
                 <li><strong>Протокол докладов (формат):</strong>
                   <br><span style="color: #a4a4b3; font-family: monospace; font-size: 14px; margin-left: 10px;">1. Начало [Звание, Имя Фамилия, Название объекта; время]</span>
