@@ -37,11 +37,6 @@
       overflow-x: hidden; 
     }
 
-    /* Блокировка скролла для стартового экрана */
-    body.locked {
-      overflow: hidden;
-    }
-
     /* === ЧЕТКИЙ ФОН ИЗ КАРТИНКИ === */
     body::before {
       content: '';
@@ -117,19 +112,17 @@
     }
 
     .hero {
-      height: 85vh; 
+      min-height: 68vh; 
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: height 0.6s ease, min-height 0.6s ease, padding 0.6s ease;
+      transition: min-height 0.6s ease, padding 0.6s ease;
     }
 
     .hero.compact {
-      height: 0;
       min-height: 0;
       padding-top: 10px;
       padding-bottom: 10px;
-      overflow: hidden;
     }
 
     .center-wrap {
@@ -231,20 +224,12 @@
       transform: translateY(20px);
       transition: 0.45s ease;
       pointer-events: none;
-      display: none; 
     }
 
     .content.show {
-      display: block;
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
-      animation: fadeInContent 0.6s ease forwards;
-    }
-
-    @keyframes fadeInContent {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* === ГЛАВНАЯ СТЕКЛЯННАЯ ПАНЕЛЬ === */
@@ -467,7 +452,7 @@
     .nested-list {
       list-style: none;
       padding: 0;
-      margin: 10px 0 0 10px; /* Небольшой отступ от основного текста */
+      margin: 10px 0 0 10px; 
     }
 
     .nested-list li {
@@ -477,13 +462,11 @@
       color: #b8b8c7;
     }
 
-    /* Переопределяем полоску на красивую круглую точку */
     .faction-list .nested-list li::before {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       top: 9px;
-      /* Градиент и свечение наследуются от основного li::before */
     }
 
     .code-green { color: #4ade80; font-weight: 600; text-shadow: 0 0 8px rgba(74, 222, 128, 0.4); }
@@ -585,12 +568,16 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      display: none; 
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.45s ease;
+      pointer-events: none;
     }
 
     .content.show ~ .footer {
-      display: flex;
-      animation: fadeInContent 0.8s ease forwards;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .footer-links {
@@ -664,7 +651,7 @@
     }
   </style>
 </head>
-<body class="locked">
+<body>
 
   <div class="lightbox" id="lightbox">
     <img src="" id="lightboxImg" alt="Полный экран">
@@ -714,7 +701,6 @@
         </div>
       </div>
 
-      <!-- Вкладка I -->
       <div id="tab1" class="tab-panel active">
         <div class="panel">
           <div class="panel-head">
@@ -731,7 +717,6 @@
         </div>
       </div>
 
-      <!-- Вкладка II -->
       <div id="tab2" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -766,7 +751,6 @@
                 <li><strong>Задачи:</strong> Охрана стратегического объекта и прилегающей территории. Включает обход стратегического объекта каждые 5 минут. Минимальное звание — Сержант.</li>
                 <li><strong>Длительность:</strong> Стандартный пост длится 15 минут с обязательными докладами.</li>
                 <li><strong>Стратегические объекты:</strong>
-                  <!-- Вложенный список с градиентными точками вместо тире -->
                   <ul class="nested-list">
                     <li>Авианосец</li>
                     <li>Основной склад</li>
@@ -794,11 +778,24 @@
               </ul>
             </div>
 
+            <div class="faction-block">
+              <h4 class="faction-title">Архивация патрулей</h4>
+              <div class="faction-lead" style="margin-bottom: 0;">
+                Все патрули будут в обязательном порядке заноситься в архив. Таким образом будет вестись строгий учет активности патрулей (по аналогии с архивами каждого отдельного отряда).
+              </div>
+            </div>
+
+            <div class="faction-block">
+              <h4 class="faction-title">Система поощрений</h4>
+              <div class="faction-lead" style="margin-bottom: 0;">
+                На каждой еженедельной субботней собре (собрании) Генерал будет лично поощрять самых активных военнослужащих каждого отряда в виде щедрого денежного вознаграждения.
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
 
-      <!-- Вкладка III -->
       <div id="tab3" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -950,7 +947,6 @@
       </div>
     </section>
 
-    <!-- ФУТЕР -->
     <footer class="footer">
       <div>&copy; 2026 <span class="footer-highlight">QEOZAN DEV</span>. Все права защищены.</div>
       <div>Специализированный портал для руководящего состава Армии.</div>
@@ -992,9 +988,6 @@
 
       if (firstOpen) {
         firstOpen = false;
-        
-        // Снимаем блокировку скролла
-        document.body.classList.remove("locked");
 
         startTabs.classList.add("fly-up");
         intro.classList.add("hide");
