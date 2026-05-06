@@ -132,7 +132,7 @@
       align-items: center;
       gap: 26px;
       transition: 0.6s ease;
-      margin-top: -40vh; 
+      margin-top: -15vh; 
     }
 
     .intro {
@@ -509,7 +509,9 @@
       flex-direction: column;
       align-items: center;
       margin-bottom: 50px;
-      margin-top: 20px; 
+      margin-top: 0; /* Убрали лишний отступ */
+      transform: translateY(-30px); /* <--- Эта строчка поднимает сам текст. 
+                                         Чем больше минус (например, -50px), тем выше текст */
       animation: fadeIn 0.8s ease;
       position: relative;
     }
