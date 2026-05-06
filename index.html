@@ -15,9 +15,12 @@
     :root {
       --bg-1: #0a0a0f;
       --bg-2: #12121a;
+      --panel: rgba(255, 255, 255, 0.05);
+      --panel-strong: rgba(255, 255, 255, 0.08);
       --text: #f3f3f7;
       --muted: #a4a4b3;
       --glow: 0 0 30px rgba(255, 255, 255, 0.06);
+      --radius: 24px;
     }
 
     html {
@@ -45,7 +48,7 @@
       background-image: url('https://i.imgur.com/LRCKXJV.png');
       background-size: cover;
       background-position: center;
-      filter: blur(0px) brightness(1.2); 
+      filter: blur(0px) brightness(0.4); 
       z-index: -2;
     }
 
@@ -68,7 +71,10 @@
     .site {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 28px 20px 60px;
+      padding: 28px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* === ВЕРХНЕЕ МЕНЮ (iOS СТЕКЛО) === */
@@ -96,7 +102,7 @@
       gap: 12px;
       padding: 12px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-top: 1px solid rgba(255, 255, 255, 0.2); /* Блик сверху */
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
       background: rgba(20, 20, 30, 0.25);
       backdrop-filter: blur(20px) saturate(150%);
       -webkit-backdrop-filter: blur(20px) saturate(150%);
@@ -219,6 +225,7 @@
       transform: translateY(20px);
       transition: 0.45s ease;
       pointer-events: none;
+      flex-grow: 1; /* Чтобы контент растягивался, а футер был внизу */
     }
 
     .content.show {
@@ -230,7 +237,7 @@
     /* === ГЛАВНАЯ СТЕКЛЯННАЯ ПАНЕЛЬ === */
     .panel {
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-top: 1px solid rgba(255, 255, 255, 0.2); /* Светящаяся грань */
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
       border-radius: 28px;
       padding: 32px;
@@ -309,9 +316,10 @@
       margin-bottom: 0;
     }
 
+    /* Стеклянные карточки под-модулей */
     .sub-panel {
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-top: 1px solid rgba(255, 255, 255, 0.15); /* Блик */
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
       border-radius: 20px;
       padding: 24px;
@@ -360,14 +368,13 @@
       transform: scale(1.03);
     }
 
-    /* === ВНУТРЕННИЕ БЛОКИ С ТЕКСТОМ (Самое глубокое стекло) === */
+    /* === ВНУТРЕННИЕ БЛОКИ С ТЕКСТОМ === */
     .faction-block {
-      /* Заменили черный на морозно-белый градиент */
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.005)); 
       border-radius: 16px;
       padding: 24px;
       border: 1px solid rgba(255, 255, 255, 0.06);
-      border-top: 1px solid rgba(255, 255, 255, 0.12); /* Верхний блик */
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(15px) saturate(130%);
       -webkit-backdrop-filter: blur(15px) saturate(130%);
       font-family: 'Montserrat', sans-serif; 
@@ -444,7 +451,6 @@
       box-shadow: 0 0 8px rgba(155, 155, 174, 0.6);
     }
 
-    /* Специальные стили для тен-кодов */
     .code-green { color: #4ade80; font-weight: 600; text-shadow: 0 0 8px rgba(74, 222, 128, 0.4); }
     .code-yellow { color: #facc15; font-weight: 600; text-shadow: 0 0 8px rgba(250, 204, 21, 0.4); }
     .code-red { color: #f87171; font-weight: 600; text-shadow: 0 0 8px rgba(248, 113, 113, 0.4); }
@@ -528,6 +534,66 @@
       pointer-events: none;
     }
 
+    /* === ФУТЕР (ВНИЗУ САЙТА) === */
+    .footer {
+      margin-top: 60px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      background: linear-gradient(180deg, rgba(20, 20, 30, 0.25), rgba(10, 10, 15, 0.4));
+      backdrop-filter: blur(20px) saturate(120%);
+      -webkit-backdrop-filter: blur(20px) saturate(120%);
+      border-radius: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+      /* Скрыт изначально вместе с контентом */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.45s ease;
+      pointer-events: none;
+    }
+
+    /* Показываем футер вместе с контентом */
+    .content.show + .footer {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    .footer-highlight {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
     /* === ЛАЙТБОКС (УВЕЛИЧЕНИЕ ФОТО) === */
     .lightbox {
       position: fixed;
@@ -585,6 +651,7 @@
       .topbar-inner { width: 100%; border-radius: 24px; }
       .sub-panel { padding: 16px; }
       .sub-image { height: 200px; } 
+      .footer-links { flex-direction: column; gap: 12px; }
     }
   </style>
 </head>
@@ -602,6 +669,8 @@
     <button class="tab-btn small side-btn" data-target="sub-4">IV</button>
     <button class="tab-btn small side-btn" data-target="sub-5">V</button>
     <button class="tab-btn small side-btn" data-target="sub-6">VI</button>
+    <!-- Добавили 7 кнопку для Общих взаимодействий -->
+    <button class="tab-btn small side-btn" data-target="sub-7">VII</button>
   </div>
 
   <div class="site">
@@ -655,7 +724,7 @@
         </div>
       </div>
 
-      <!-- Вкладка II (ПОЛНОСТЬЮ НОВАЯ СТРУКТУРА) -->
+      <!-- Вкладка II -->
       <div id="tab2" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -673,7 +742,6 @@
 
           <div class="grid" style="grid-template-columns: 1fr; gap: 24px;">
 
-            <!-- Патруль -->
             <div class="faction-block">
               <h4 class="faction-title">Регламент патрулирования</h4>
               <ul class="faction-list">
@@ -685,7 +753,6 @@
               </ul>
             </div>
 
-            <!-- Посты -->
             <div class="faction-block">
               <h4 class="faction-title">Постовая служба</h4>
               <ul class="faction-list">
@@ -702,7 +769,6 @@
               </ul>
             </div>
 
-            <!-- Тен-коды -->
             <div class="faction-block">
               <h4 class="faction-title">Система докладов (Тен-Коды)</h4>
               <p style="color: #d1d1e0; line-height: 1.6; margin-top: -10px; margin-bottom: 16px; padding-left: 16px; font-weight: 500;">
@@ -729,7 +795,6 @@
           
           <div class="sub-sections-wrapper">
             
-            <!-- МЭРИЯ -->
             <div id="sub-1" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Мэрия</h3>
@@ -755,7 +820,6 @@
               </div>
             </div>
             
-            <!-- FBI -->
             <div id="sub-2" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">FBI</h3>
@@ -780,7 +844,6 @@
               </div>
             </div>
             
-            <!-- CPD -->
             <div id="sub-3" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">CPD</h3>
@@ -805,7 +868,6 @@
               </div>
             </div>
             
-            <!-- HOSPITAL -->
             <div id="sub-4" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Больница</h3>
@@ -824,7 +886,6 @@
               </div>
             </div>
             
-            <!-- SMI -->
             <div id="sub-5" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">SMI</h3>
@@ -844,7 +905,6 @@
               </div>
             </div>
             
-            <!-- UNIVERSITY -->
             <div id="sub-6" class="sub-section">
               <div class="sub-panel">
                 <h3 class="sub-section-title">Университет</h3>
@@ -861,11 +921,44 @@
                 </div>
               </div>
             </div>
+
+            <!-- НОВЫЙ БЛОК БЕЗ ФОТО -->
+            <div id="sub-7" class="sub-section">
+              <div class="sub-panel">
+                <h3 class="sub-section-title">Общие положения</h3>
+                <div class="faction-block">
+                  <h4 class="faction-title">Общеструктурные взаимодействия</h4>
+                  
+                  <div class="faction-lead">
+                    Данные правила регламентируют базовые принципы взаимодействия армии со всеми остальными государственными структурами штата.
+                  </div>
+
+                  <ul class="faction-list">
+                    <li>Вставь сюда свой текст для общеструктурных взаимодействий.</li>
+                    <li>Любой сотрудник гос. структур при нахождении на территории ВБ обязан подчиняться приказам старшего офицерского состава.</li>
+                    <li>Во время объявления режима ЧС на территории базы все гражданские лица, включая сотрудников других фракций без спец. допуска, обязаны покинуть территорию.</li>
+                    <li>Вставь сюда свой текст для общеструктурных взаимодействий.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
             
           </div>
         </div>
       </div>
     </section>
+
+    <!-- СТЕКЛЯННЫЙ ФУТЕР -->
+    <footer class="footer">
+      <div>&copy; 2024 <span class="footer-highlight">QEOZAN DEV</span>. Все права защищены.</div>
+      <div>Специализированный портал для руководящего состава Армии.</div>
+      <div class="footer-links">
+        <a href="#">Официальный форум</a>
+        <a href="#">Спец. связь (Discord)</a>
+        <a href="#">Устав Армии</a>
+      </div>
+    </footer>
+
   </div>
 
   <script>
