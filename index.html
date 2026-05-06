@@ -34,8 +34,12 @@
       color: var(--text);
       background-color: var(--bg-1);
       background-attachment: fixed; 
-      /* Блокируем скролл изначально */
-      overflow: hidden; 
+      overflow-x: hidden;
+    }
+
+    /* Специальный класс для блокировки скролла до выбора вопроса */
+    body.locked {
+      overflow: hidden;
     }
 
     /* === ЧЕТКИЙ ФОН ИЗ КАРТИНКИ === */
@@ -70,12 +74,11 @@
     }
 
     .site {
+      position: relative;
+      z-index: 10; /* Жестко выводим контент поверх всех фонов */
       max-width: 1200px;
       margin: 0 auto;
       padding: 28px 20px 40px;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
     /* === ВЕРХНЕЕ МЕНЮ (iOS СТЕКЛО) === */
@@ -114,7 +117,7 @@
     }
 
     .hero {
-      min-height: 100vh;
+      min-height: 75vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -226,7 +229,6 @@
       transform: translateY(20px);
       transition: 0.45s ease;
       pointer-events: none;
-      flex-grow: 1; 
     }
 
     .content.show {
@@ -597,7 +599,6 @@
     @media (max-width: 900px) {
       .intro h1 { font-size: 42px; }
       .tab-btn.large { min-width: 140px; font-size: 32px; padding: 24px 26px; }
-      .grid { grid-template-columns: 1fr; }
       .side-nav { display: none; }
     }
     @media (max-width: 640px) {
@@ -610,7 +611,7 @@
     }
   </style>
 </head>
-<body>
+<body class="locked"> <!-- Блокируем скролл изначально -->
 
   <div class="lightbox" id="lightbox">
     <img src="" id="lightboxImg" alt="Полный экран">
@@ -660,22 +661,26 @@
         </div>
       </div>
 
+      <!-- Вкладка I -->
       <div id="tab1" class="tab-panel active">
         <div class="panel">
           <div class="panel-head">
             <h2 class="panel-title">Вопрос I</h2>
             <div class="panel-mark">I</div>
           </div>
-          <div class="grid">
-            <div class="placeholder">Поле под основной контент</div>
-            <div class="stack">
-              <div class="placeholder">Поле 1</div>
-              <div class="placeholder">Поле 2</div>
-            </div>
+          
+          <div class="faction-block">
+            <h4 class="faction-title">Заголовок</h4>
+            <div class="faction-lead">Тут можешь вставить текст для первого вопроса.</div>
+            <ul class="faction-list">
+              <li>Пункт 1</li>
+              <li>Пункт 2</li>
+            </ul>
           </div>
         </div>
       </div>
 
+      <!-- Вкладка II -->
       <div id="tab2" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -691,7 +696,7 @@
             <strong>SOU (Site Overwatch Unit)</strong> — «глаза» военной базы. Подразделение отвечает за непрерывное пешее патрулирование внутренней территории и периметра, визуальный контроль критических объектов и выявление подозрительной активности в слепых зонах. Именно они первыми вступают в контакт с нарушителем.
           </div>
 
-          <div class="grid" style="grid-template-columns: 1fr; gap: 24px;">
+          <div style="display: grid; gap: 24px;">
 
             <div class="faction-block">
               <h4 class="faction-title">Регламент патрулирования</h4>
@@ -736,6 +741,7 @@
         </div>
       </div>
 
+      <!-- Вкладка III -->
       <div id="tab3" class="tab-panel">
         <div class="panel">
           <div class="panel-head">
@@ -887,6 +893,7 @@
       </div>
     </section>
 
+    <!-- ФУТЕР -->
     <footer class="footer">
       <div>&copy; 2026 <span class="footer-highlight">QEOZAN DEV</span>. Все права защищены.</div>
       <div>Специализированный портал для руководящего состава Армии.</div>
@@ -929,8 +936,8 @@
       if (firstOpen) {
         firstOpen = false;
         
-        // Разблокируем скролл страницы
-        document.body.style.overflow = 'auto';
+        // Снимаем блокировку скролла
+        document.body.classList.remove("locked");
 
         startTabs.classList.add("fly-up");
         intro.classList.add("hide");
