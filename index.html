@@ -1133,6 +1133,12 @@
         }
       };
 
+      // === ВОТ ТА САМАЯ КОМАНДА ДЛЯ ПЛАВНОГО СКРОЛЛА НАВЕРХ ===
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
       if (firstOpen) {
         firstOpen = false;
         
