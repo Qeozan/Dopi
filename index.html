@@ -1038,9 +1038,24 @@
       }
     }
 
-    allButtons.forEach(btn => {
-      btn.addEventListener("click", () => openTab(btn.dataset.tab));
+    // Переменная, чтобы отслеживать, кликал ли пользователь
+  let userInteracted = false;
+
+  // Таймер на 5 секунд
+  const autoRedirectTimer = setTimeout(() => {
+    if (!userInteracted) {
+      openTab('tab1');
+    }
+  }, 5000);
+
+  allButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // Если юзер кликнул, помечаем взаимодействие и отменяем таймер
+      userInteracted = true;
+      clearTimeout(autoRedirectTimer); 
+      openTab(btn.dataset.tab);
     });
+  });
 
     sideNavBtns.forEach(btn => {
       btn.addEventListener("click", () => {
